@@ -137,7 +137,7 @@ function MacHome({ onToggle }) {
 
       {/* 하단 푸터 */}
       <footer className="pb-10 text-center text-white/80 text-[13px] sm:text-[14px]">
-        <div>© {new Date().getFullYear()} Sehyun Kim · Main Home</div>
+        <div>© {new Date().getFullYear()} Minyong Park · Main Home</div>
         <div className="mt-3">
           <Link to="/" className="underline text-white/90 hover:text-white">← Back to Portfolio</Link>
         </div>
@@ -259,7 +259,7 @@ function WindowsHome({ onToggle }) {
 
       {/* 하단 푸터 (윈도우톤) */}
       <footer className="pb-8 text-center text-black/60 text-[12px] sm:text-[13px]">
-        <div>© {new Date().getFullYear()} Sehyun Kim · Main Home</div>
+        <div>© {new Date().getFullYear()} Minyong Park · Main Home</div>
         <div className="mt-2">
           <Link to="/" className="underline text-black/70 hover:text-black">← Back to Portfolio</Link>
         </div>
