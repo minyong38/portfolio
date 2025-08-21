@@ -5,20 +5,20 @@ import { Link } from "react-router-dom";
  *  Mac 레이아웃 (요청하신 버전 그대로 유지, 그리드 크기 확대)
  *  ------------------------- */
 const ALL_APPS_MAC = [
-  { name: "Gallery", url: "#", cat: "Media", icon: "/icons/사진.png" },
-  { name: "Maps", url: "#", cat: "Tools", icon: "/icons/지도.png" },
-  { name: "Instagram", url: "https://instagram.com/", cat: "Social", icon: "/icons/인스타.png" },
-  { name: "Music", url: "#", cat: "Media", icon: "/icons/뮤직.png" },
+  { name: "Gallery", url: "#", cat: "Media", icon: "src/icons/사진.png" },
+  { name: "Maps", url: "#", cat: "Tools", icon: "src/icons/지도.png" },
+  { name: "Instagram", url: "https://instagram.com/", cat: "Social", icon: "src/icons/인스타.png" },
+  { name: "Music", url: "#", cat: "Media", icon: "src/icons/뮤직.png" },
 ];
 
 /** -------------------------
  *  Windows 레이아웃 전용 데이터 (샘플)
  *  ------------------------- */
 const ALL_APPS_WIN = [
-  { name: "Photos", url: "#", cat: "Media", icon: "src/assets/icons/win/photos.png" },
-  { name: "Maps", url: "#", cat: "Tools", icon: "src/assets/icons/win/maps.png" },
-  { name: "Instagram", url: "https://instagram.com/", cat: "Social", icon: "src/assets/icons/win/instagram.png" },
-  { name: "Music", url: "#", cat: "Media", icon: "src/assets/icons/win/music.png" },
+  { name: "Photos", url: "#", cat: "Media", icon: "src/icons/win/photos.png" },
+  { name: "Maps", url: "#", cat: "Tools", icon: "src/icons/win/maps.png" },
+  { name: "Instagram", url: "https://instagram.com/", cat: "Social", icon: "src/icons/win/instagram.png" },
+  { name: "Music", url: "#", cat: "Media", icon: "src/icons/win/music.png" },
 
 ];
 
