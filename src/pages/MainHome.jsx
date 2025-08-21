@@ -2,7 +2,7 @@ import { useMemo, useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 /** -------------------------
- *  Mac 레이아웃 (그리드 크기 확대 + hover 확대)
+ *  Mac 레이아웃 (요청하신 버전 그대로 유지, 그리드 크기 확대)
  *  ------------------------- */
 const ALL_APPS_MAC = [
   { name: "Gallery", url: "#", cat: "Media", icon: "/icons/사진.png" },
@@ -19,10 +19,12 @@ const ALL_APPS_WIN = [
   { name: "Maps", url: "#", cat: "Tools", icon: "/icons/win/maps.png" },
   { name: "Instagram", url: "https://instagram.com/", cat: "Social", icon: "/icons/win/instagram.png" },
   { name: "Music", url: "#", cat: "Media", icon: "/icons/win/music.png" },
+
 ];
 
 export default function MainHome() {
   const [os, setOs] = useState("mac"); // "mac" | "windows"
+
   return os === "mac" ? <MacHome onToggle={() => setOs("windows")} /> : <WindowsHome onToggle={() => setOs("mac")} />;
 }
 
@@ -82,6 +84,7 @@ function MacHome({ onToggle }) {
               <span className="opacity-70 mr-2">https://</span>
               <span className="truncate">{hoverUrl || "select an app…"}</span>
             </div>
+
             <div className="relative">
               <input
                 ref={inputRef}
@@ -93,7 +96,7 @@ function MacHome({ onToggle }) {
             </div>
           </div>
 
-          {/* 앱 그리드 */}
+          {/* 앱 그리드 (크게 확대) */}
           <div className="px-16 pb-16 pt-10">
             <div className="grid grid-cols-4 sm:grid-cols-5 gap-x-16 gap-y-16 justify-items-center">
               {apps.map(app => {
@@ -106,12 +109,12 @@ function MacHome({ onToggle }) {
                     rel={external ? "noreferrer" : undefined}
                     onMouseEnter={() => setHoverUrl(app.url.replace(/^https?:\/\//, ""))}
                     onMouseLeave={() => setHoverUrl("")}
-                    className="flex flex-col items-center space-y-4 group"
+                    className="flex flex-col items-center space-y-4"
                   >
                     <img
                       src={app.icon}
                       alt={app.name}
-                      className="w-24 h-24 object-contain transition-transform duration-300 ease-in-out group-hover:scale-110"
+                      className="w-24 h-24 object-contain"
                       onError={(e) => {
                         e.currentTarget.style.display = 'none';
                         const fallback = document.createElement('span');
@@ -124,6 +127,7 @@ function MacHome({ onToggle }) {
                   </a>
                 );
               })}
+
               {apps.length === 0 && (
                 <div className="col-span-full text-center text-white/80 py-16">No results</div>
               )}
@@ -144,7 +148,7 @@ function MacHome({ onToggle }) {
 }
 
 /** -------------------------
- *  Windows 버전 (hover 확대 포함)
+ *  Windows 버전 (맥 기준과 같은 위치에 탭바+주소/검색 포함, 스타일만 윈도우)
  *  ------------------------- */
 function WindowsHome({ onToggle }) {
   const [q, setQ] = useState("");
@@ -182,7 +186,7 @@ function WindowsHome({ onToggle }) {
         </button>
       </div>
 
-      {/* 중앙 패널 */}
+      {/* 중앙 패널 (맥과 동일한 폭/여백) */}
       <section className="min-h-screen w-full flex items-center justify-center py-14">
         <div className="rounded-3xl bg-white/80 backdrop-blur-md border border-gray-200 shadow-[0_20px_60px_rgba(0,0,0,0.15)] w-[min(1280px,95vw)]">
           {/* 윈도우 탭바 */}
@@ -198,7 +202,7 @@ function WindowsHome({ onToggle }) {
             </div>
           </div>
 
-          {/* 주소창 + 검색 */}
+          {/* 주소창 + 검색 (윈도우 톤) */}
           <div className="flex items-center gap-3 px-6 pt-6">
             <div className="flex-1 h-12 rounded-lg bg-white text-black/80 flex items-center px-5 text-lg shadow-inner border border-gray-200">
               <span className="opacity-60 mr-2">https://</span>
@@ -213,7 +217,7 @@ function WindowsHome({ onToggle }) {
             />
           </div>
 
-          {/* 앱 그리드 */}
+          {/* 앱 그리드 (맥 기준과 같은 배치로 확대) */}
           <div className="px-16 pb-16 pt-10">
             <div className="grid grid-cols-4 sm:grid-cols-5 gap-x-16 gap-y-16 justify-items-center">
               {apps.map(app => {
@@ -226,7 +230,7 @@ function WindowsHome({ onToggle }) {
                     rel={external ? "noreferrer" : undefined}
                     onMouseEnter={() => setHoverUrl(app.url.replace(/^https?:\/\//, ""))}
                     onMouseLeave={() => setHoverUrl("")}
-                    className="flex flex-col items-center space-y-4 group"
+                    className="flex flex-col items-center space-y-4"
                   >
                     <div className="w-28 h-28 rounded-xl bg-white border border-gray-200 flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.1)]">
                       <img
@@ -246,6 +250,7 @@ function WindowsHome({ onToggle }) {
                   </a>
                 );
               })}
+
               {apps.length === 0 && (
                 <div className="col-span-full text-center text-black/60 py-16">No results</div>
               )}
@@ -254,7 +259,7 @@ function WindowsHome({ onToggle }) {
         </div>
       </section>
 
-      {/* 하단 푸터 */}
+      {/* 하단 푸터 (윈도우톤) */}
       <footer className="pb-8 text-center text-black/60 text-[12px] sm:text-[13px]">
         <div>© {new Date().getFullYear()} Sehyun Kim · Main Home</div>
         <div className="mt-2">
