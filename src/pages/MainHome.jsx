@@ -15,10 +15,10 @@ const ALL_APPS_MAC = [
  *  Windows 레이아웃 전용 데이터 (샘플)
  *  ------------------------- */
 const ALL_APPS_WIN = [
-  { name: "Photos", url: "#", cat: "Media", icon: "/icons/win/photos.png" },
-  { name: "Maps", url: "#", cat: "Tools", icon: "/icons/win/maps.png" },
-  { name: "Instagram", url: "https://instagram.com/", cat: "Social", icon: "/icons/win/instagram.png" },
-  { name: "Music", url: "#", cat: "Media", icon: "/icons/win/music.png" },
+  { name: "Photos", url: "#", cat: "Media", icon: "src/assets/icons/win/photos.png" },
+  { name: "Maps", url: "#", cat: "Tools", icon: "src/assets/icons/win/maps.png" },
+  { name: "Instagram", url: "https://instagram.com/", cat: "Social", icon: "src/assets/icons/win/instagram.png" },
+  { name: "Music", url: "#", cat: "Media", icon: "src/assets/icons/win/music.png" },
 
 ];
 
