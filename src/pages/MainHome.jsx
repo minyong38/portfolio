@@ -5,21 +5,20 @@ import { Link } from "react-router-dom";
  *  Mac 레이아웃 (요청하신 버전 그대로 유지, 그리드 크기 확대)
  *  ------------------------- */
 const ALL_APPS_MAC = [
-  { name: "Gallery", url: "#", cat: "Media", icon: "src/icons/사진.png" },
-  { name: "Maps", url: "#", cat: "Tools", icon: "src/icons/지도.png" },
-  { name: "Instagram", url: "https://instagram.com/", cat: "Social", icon: "src/icons/인스타.png" },
-  { name: "Music", url: "#", cat: "Media", icon: "src/icons/뮤직.png" },
+  { name: "Gallery", url: "#", cat: "Media", icon: "icons/photo.png" },
+  { name: "Maps", url: "#", cat: "Tools", icon: "icons/maps.png" },
+  { name: "Instagram", url: "https://instagram.com/", cat: "Social", icon: "icons/instagram.png" },
+  { name: "Music", url: "#", cat: "Media", icon: "icons/music.png" },
 ];
 
-/** -------------------------
+/** -------------------------s
  *  Windows 레이아웃 전용 데이터 (샘플)
  *  ------------------------- */
 const ALL_APPS_WIN = [
-  { name: "Photos", url: "#", cat: "Media", icon: "src/icons/win/photos.png" },
-  { name: "Maps", url: "#", cat: "Tools", icon: "src/icons/win/maps.png" },
-  { name: "Instagram", url: "https://instagram.com/", cat: "Social", icon: "src/icons/win/instagram.png" },
-  { name: "Music", url: "#", cat: "Media", icon: "src/icons/win/music.png" },
-
+  { name: "Photos", url: "#", cat: "Media", icon: "icons/win/photos.png" },
+  { name: "Maps", url: "#", cat: "Tools", icon: "icons/win/maps.png" },
+  { name: "Instagram", url: "https://instagram.com/", cat: "Social", icon: "icons/win/instagram.png" },
+  { name: "Music", url: "#", cat: "Media", icon: "icons/win/music.png" },
 ];
 
 export default function MainHome() {
@@ -100,6 +99,7 @@ function MacHome({ onToggle }) {
           <div className="px-16 pb-16 pt-10">
             <div className="grid grid-cols-4 sm:grid-cols-5 gap-x-16 gap-y-16 justify-items-center">
               {apps.map(app => {
+                const base = import.meta.env.BASE_URL;
                 const external = app.url.startsWith("http");
                 return (
                   <a
@@ -111,9 +111,8 @@ function MacHome({ onToggle }) {
                     onMouseLeave={() => setHoverUrl("")}
                     className="flex flex-col items-center space-y-4"
                   >
-                    <img
-                      src={app.icon}
-                      alt={app.name}
+                    
+                    <img src={`${base}${app.icon}`} alt={app.name}
                       className="w-24 h-24 object-contain"
                       onError={(e) => {
                         e.currentTarget.style.display = 'none';
@@ -221,6 +220,7 @@ function WindowsHome({ onToggle }) {
           <div className="px-16 pb-16 pt-10">
             <div className="grid grid-cols-4 sm:grid-cols-5 gap-x-16 gap-y-16 justify-items-center">
               {apps.map(app => {
+                const base = import.meta.env.BASE_URL;
                 const external = app.url.startsWith("http");
                 return (
                   <a
@@ -233,9 +233,7 @@ function WindowsHome({ onToggle }) {
                     className="flex flex-col items-center space-y-4"
                   >
                     <div className="w-28 h-28 rounded-xl bg-white border border-gray-200 flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.1)]">
-                      <img
-                        src={app.icon}
-                        alt={app.name}
+                      <img src={`${base}${app.icon}`} alt={app.name} 
                         className="w-24 h-24 object-contain transition-transform duration-300 ease-in-out group-hover:scale-110"
                         onError={(e) => {
                           e.currentTarget.style.display = 'none';
