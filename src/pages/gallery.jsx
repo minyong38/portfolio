@@ -1,8 +1,11 @@
 import React from 'react';
-import { photoData } from '../data/photoData'; // 1번에서 만든 데이터 import
-import './Gallery.css'; // 갤러리 전용 CSS 파일 import
+import { useNavigate } from 'react-router-dom';
+import { photoData } from '../data/photoData';
+import './Gallery.css';
 
 const Gallery = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="gallery-container">
       <h1 className="gallery-title">My Gallery</h1>
@@ -16,6 +19,21 @@ const Gallery = () => {
           </div>
         ))}
       </div>
+      <button
+        className="back-button"
+        onClick={() => navigate(-1)}
+        style={{
+          margin: '20px 0',
+          padding: '8px 18px',
+          borderRadius: '6px',
+          border: 'none',
+          background: '#444',
+          color: '#fff',
+          cursor: 'pointer',
+        }}
+      >
+         뒤로가기
+      </button>
     </div>
   );
 };

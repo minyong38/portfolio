@@ -5,6 +5,8 @@ import { Routes, Route } from 'react-router-dom';
 // --- 페이지 컴포넌트들 ---
 import MainHome from './pages/MainHome';
 import Gallery from './pages/gallery';
+import Maps from './pages/Maps';
+import Music from './pages/Music';
 import NotFound from './pages/NotFound';
 
 // --- 포트폴리오 섹션 컴포넌트들 ---
@@ -55,6 +57,10 @@ export default function App() {
 
       {/* 그 외 모든 경로는 404 페이지를 보여줍니다. */}
       <Route path="*" element={<NotFound />} />
+
+      {/* 📍 아래 두 줄을 추가하여 Maps와 Music 경로를 연결합니다. */}
+      <Route path="/maps" element={<Maps />} />
+      <Route path="/music" element={<Music />} />
     </Routes>
   );
 }

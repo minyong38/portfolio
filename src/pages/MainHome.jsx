@@ -1,14 +1,14 @@
 import { useMemo, useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 /** -------------------------
  *  Mac 레이아웃 (요청하신 버전 그대로 유지, 그리드 크기 확대)
  *  ------------------------- */
 const ALL_APPS_MAC = [
   { name: "Gallery", url: "/gallery", cat: "Media", icon: "icons/photo.png" },
-  { name: "Maps", url: "#", cat: "Tools", icon: "icons/maps.png" },
-  { name: "Instagram", url: "https://instagram.com/", cat: "Social", icon: "icons/instagram.png" },
-  { name: "Music", url: "#", cat: "Media", icon: "icons/music.png" },
+  { name: "Maps", url: "/maps", cat: "Tools", icon: "icons/maps.png" },
+  { name: "Music", url: "/music", cat: "Media", icon: "icons/music.png" },
+  { name: "Instagram", url: "https://www.instagram.com/meee__nyong/", cat: "Social", icon: "icons/instagram.png" },
 ];
 
 /** -------------------------s
@@ -16,9 +16,9 @@ const ALL_APPS_MAC = [
  *  ------------------------- */
 const ALL_APPS_WIN = [
   { name: "Photos", url: "/gallery", cat: "Media", icon: "icons/win/photos.png" },
-  { name: "Maps", url: "#", cat: "Tools", icon: "icons/win/maps.png" },
+  { name: "Maps", url: "/maps", cat: "Tools", icon: "icons/win/maps.png" },
+  { name: "Music", url: "/music", cat: "Media", icon: "icons/win/music.png" },
   { name: "Instagram", url: "https://www.instagram.com/meee__nyong/", cat: "Social", icon: "icons/win/instagram.png" },
-  { name: "Music", url: "#", cat: "Media", icon: "icons/win/music.png" },
 ];
 
 export default function MainHome() {
@@ -34,6 +34,7 @@ function MacHome({ onToggle }) {
   const [q, setQ] = useState("");
   const [hoverUrl, setHoverUrl] = useState("");
   const inputRef = useRef(null);
+  const navigate = useNavigate();
 
   const apps = useMemo(() => {
     const query = q.trim().toLowerCase();
@@ -56,7 +57,7 @@ function MacHome({ onToggle }) {
   }, []);
 
   return (
-    <main className="min-h-screen relative bg-home-gradient">
+    <main className="min-h-screen relative bg-home-gradient flex flex-col">
       {/* OS 토글: Mac → Windows */}
       <div className="absolute top-6 right-6 z-10">
         <button
@@ -70,7 +71,7 @@ function MacHome({ onToggle }) {
       </div>
 
       {/* 중앙 패널 */}
-      <section className="min-h-screen w-full flex items-center justify-center py-14">
+      <section className="flex-1 w-full flex items-center justify-center py-10">
         <div className="glass-panel w-[min(1280px,95vw)]">
           {/* 상단 브라우저바 + 검색 */}
           <div className="flex items-center gap-3 px-6 pt-6">
@@ -98,27 +99,30 @@ function MacHome({ onToggle }) {
           {/* 앱 그리드  */}
           <div className="px-16 pb-16 pt-10">
             <div className="grid grid-cols-4 sm:grid-cols-5 gap-x-16 gap-y-16 justify-items-center">
-              {apps.map(app => {
+              {apps.map((app, idx) => {
                 const base = import.meta.env.BASE_URL;
                 const external = app.url.startsWith("http");
-                
+
                 // 내부 링크일 경우 사용할 Link 컴포넌트
                 if (!external) {
                   return (
                     <Link
                       key={app.name}
-                      to={app.url} 
+                      to={app.url}
                       onMouseEnter={() => setHoverUrl(app.name)}
                       onMouseLeave={() => setHoverUrl("")}
-                      className="flex flex-col items-center space-y-4"
+                      className="flex flex-col items-center space-y-4 group"
+                      style={{ transition: "all 0.3s" }}
                     >
-                      <img src={`${base}${app.icon}`} alt={app.name} className="w-24 h-24 object-contain" />
+                      <div className="w-28 h-28 rounded-xl bg-white/80 border border-gray-200 flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.1)]">
+                        <img src={`${base}${app.icon}`} alt={app.name} className="w-24 h-24 object-contain transition-transform duration-300 ease-in-out group-hover:scale-110" />
+                      </div>
                       <div className="text-[15px] sm:text-[16px] text-white/90">{app.name}</div>
                     </Link>
                   );
                 }
 
-
+                // 외부 링크일 경우 (<a> 사용)
                 return (
                   <a
                     key={app.name}
@@ -127,9 +131,12 @@ function MacHome({ onToggle }) {
                     rel="noreferrer"
                     onMouseEnter={() => setHoverUrl(app.url.replace(/^https?:\/\//, ""))}
                     onMouseLeave={() => setHoverUrl("")}
-                    className="flex flex-col items-center space-y-4"
+                    className="flex flex-col items-center space-y-4 group"
+                    style={{ transition: "all 0.3s" }}
                   >
-                    <img src={`${base}${app.icon}`} alt={app.name} className="w-24 h-24 object-contain" />
+                    <div className="w-28 h-28 rounded-xl bg-white/80 border border-gray-200 flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.1)]">
+                      <img src={`${base}${app.icon}`} alt={app.name} className="w-24 h-24 object-contain transition-transform duration-300 ease-in-out group-hover:scale-110" />
+                    </div>
                     <div className="text-[15px] sm:text-[16px] text-white/90">{app.name}</div>
                   </a>
                 );
@@ -144,7 +151,7 @@ function MacHome({ onToggle }) {
       </section>
 
       {/* 하단 푸터 */}
-      <footer className="pb-10 text-center text-white/80 text-[13px] sm:text-[14px]">
+      <footer className="pb-4 text-center text-white/80 text-[13px] sm:text-[14px]">
         <div>© {new Date().getFullYear()} Minyong Park · Main Home</div>
         <div className="mt-3">
           <Link to="/" className="underline text-white/90 hover:text-white">← Back to Portfolio</Link>
@@ -155,12 +162,13 @@ function MacHome({ onToggle }) {
 }
 
 /** -------------------------
- *  Windows 버전 (맥 기준과 같은 위치에 탭바+주소/검색 포함, 스타일만 윈도우)
+ *  Windows 버전
  *  ------------------------- */
 function WindowsHome({ onToggle }) {
   const [q, setQ] = useState("");
   const [hoverUrl, setHoverUrl] = useState("");
   const inputRef = useRef(null);
+  const navigate = useNavigate();
 
   const apps = useMemo(() => ALL_APPS_WIN, []);
 
@@ -180,21 +188,23 @@ function WindowsHome({ onToggle }) {
   }, []);
 
   return (
-    <main className="min-h-screen relative bg-gradient-to-br from-[#f6f6f6] to-[#eaeaea]">
+    <main className="min-h-screen relative bg-gradient-to-br from-[#f6f6f6] to-[#eaeaea] flex flex-col">
       {/* OS 토글 */}
       <div className="absolute top-6 right-6 z-20">
         <button
           onClick={onToggle}
-          className="group flex items-center w-36 h-10 rounded-full bg-white text-black shadow px-1"
+          className="group flex items-center w-36 h-10 rounded-full bg-white text-black shadow px-1 relative"
           aria-label="Switch to Mac"
         >
-          <span className="inline-block w-8 h-8 rounded-full bg-neutral-400 shadow" style={{ transform: "translateX(104px)" }} />
-          <span className="flex-1 text-center font-medium">Windows</span>
+          <span
+            className="inline-block w-8 h-8 rounded-full bg-neutral-400 shadow absolute right-1 top-1"
+          />
+          <span className="flex-1 text-center font-medium z-10">Windows</span>
         </button>
       </div>
 
-      {/* 중앙 패널 (맥과 동일한 폭/여백) */}
-      <section className="min-h-screen w-full flex items-center justify-center py-14">
+      {/* 중앙 패널 */}
+      <section className="flex-1 w-full flex items-center justify-center py-10">
         <div className="rounded-3xl bg-white/80 backdrop-blur-md border border-gray-200 shadow-[0_20px_60px_rgba(0,0,0,0.15)] w-[min(1280px,95vw)]">
           {/* 윈도우 탭바 */}
           <div className="flex items-center justify-between h-10 px-4 bg-[#f3f3f3] border-b border-gray-300 rounded-t-3xl">
@@ -209,7 +219,7 @@ function WindowsHome({ onToggle }) {
             </div>
           </div>
 
-          {/* 주소창 + 검색 (윈도우 톤) */}
+          {/* 주소창 + 검색 */}
           <div className="flex items-center gap-3 px-6 pt-6">
             <div className="flex-1 h-12 rounded-lg bg-white text-black/80 flex items-center px-5 text-lg shadow-inner border border-gray-200">
               <span className="opacity-60 mr-2">https://</span>
@@ -224,14 +234,13 @@ function WindowsHome({ onToggle }) {
             />
           </div>
 
-          {/* 앱 그리드 (맥 기준과 같은 배치로 확대) */}
+          {/* 앱 그리드 (맥과 완전히 동일한 구조/클래스) */}
           <div className="px-16 pb-16 pt-10">
             <div className="grid grid-cols-4 sm:grid-cols-5 gap-x-16 gap-y-16 justify-items-center">
-              {apps.map(app => {
+              {apps.map((app, idx) => {
                 const base = import.meta.env.BASE_URL;
                 const external = app.url.startsWith("http");
 
-                // 내부 링크일 경우 (<Link> 사용)
                 if (!external) {
                   return (
                     <Link
@@ -239,9 +248,10 @@ function WindowsHome({ onToggle }) {
                       to={app.url}
                       onMouseEnter={() => setHoverUrl(app.name)}
                       onMouseLeave={() => setHoverUrl("")}
-                      className="flex flex-col items-center space-y-4 group" // group 클래스 추가
+                      className="flex flex-col items-center space-y-4 group"
+                      style={{ transition: "all 0.3s" }}
                     >
-                      <div className="w-28 h-28 rounded-xl bg-white border border-gray-200 flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.1)]">
+                      <div className="w-28 h-28 rounded-xl bg-white/80 border border-gray-200 flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.1)]">
                         <img src={`${base}${app.icon}`} alt={app.name} className="w-24 h-24 object-contain transition-transform duration-300 ease-in-out group-hover:scale-110" />
                       </div>
                       <div className="text-[15px] sm:text-[16px] text-black/80">{app.name}</div>
@@ -249,7 +259,6 @@ function WindowsHome({ onToggle }) {
                   );
                 }
 
-                // 외부 링크일 경우 (<a> 사용)
                 return (
                   <a
                     key={app.name}
@@ -258,9 +267,10 @@ function WindowsHome({ onToggle }) {
                     rel="noreferrer"
                     onMouseEnter={() => setHoverUrl(app.url.replace(/^https?:\/\//, ""))}
                     onMouseLeave={() => setHoverUrl("")}
-                    className="flex flex-col items-center space-y-4 group" // group 클래스 추가
+                    className="flex flex-col items-center space-y-4 group"
+                    style={{ transition: "all 0.3s" }}
                   >
-                    <div className="w-28 h-28 rounded-xl bg-white border border-gray-200 flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.1)]">
+                    <div className="w-28 h-28 rounded-xl bg-white/80 border border-gray-200 flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.1)]">
                       <img src={`${base}${app.icon}`} alt={app.name} className="w-24 h-24 object-contain transition-transform duration-300 ease-in-out group-hover:scale-110" />
                     </div>
                     <div className="text-[15px] sm:text-[16px] text-black/80">{app.name}</div>
@@ -276,8 +286,8 @@ function WindowsHome({ onToggle }) {
         </div>
       </section>
 
-      {/* 하단 푸터 (윈도우톤) */}
-      <footer className="pb-8 text-center text-black/60 text-[12px] sm:text-[13px]">
+      {/* 하단 푸터 */}
+      <footer className="pb-3 text-center text-black/60 text-[12px] sm:text-[13px]">
         <div>© {new Date().getFullYear()} Minyong Park · Main Home</div>
         <div className="mt-2">
           <Link to="/" className="underline text-black/70 hover:text-black">← Back to Portfolio</Link>
