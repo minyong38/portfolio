@@ -8,6 +8,7 @@ import Gallery from './pages/gallery';
 import Maps from './pages/Maps';
 import Music from './pages/Music';
 import NotFound from './pages/NotFound';
+import Guestbook from "./pages/Guestbook";
 
 // --- 포트폴리오 섹션 컴포넌트들 ---
 import Navbar from "./components/Navbar";
@@ -61,6 +62,7 @@ export default function App() {
       {/* 📍 아래 두 줄을 추가하여 Maps와 Music 경로를 연결합니다. */}
       <Route path="/maps" element={<Maps />} />
       <Route path="/music" element={<Music />} />
+      <Route path="/guestbook" element={<Guestbook />} />
     </Routes>
   );
 }

@@ -12,18 +12,16 @@ export default function Skills() {
   return (
     <section id="skills" className="section">
       <div className="container-page">
-        <div className="card p-6">
-          <h2 className="section-title">스킬 : Skills</h2>
-
-          {/* 4열 레이아웃: 7개면 4 + 3 으로 배치 */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
+        <div className="card p-4 sm:p-6">
+          <h2 className="section-title text-white">스킬 : Skills</h2>
+          <div className="grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6 mt-4">
             {icons.map(s => (
               <div
                 key={s.name}
-                className="skill w-full h-[140px] flex flex-col items-center justify-center"
+                className="skill w-full h-[90px] xs:h-[110px] sm:h-[140px] flex flex-col items-center justify-center"
               >
-                <img src={s.src} alt={s.name} />
-                <div className="label mt-2">{s.name}</div>
+                <img src={s.src} alt={s.name} className="w-10 h-10 sm:w-16 sm:h-16" />
+                <div className="label mt-2 text-xs sm:text-base font-semibold text-white">{s.name}</div>
               </div>
             ))}
           </div>
