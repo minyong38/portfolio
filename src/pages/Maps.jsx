@@ -2,18 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import './Maps.css'; // 새로운 CSS 파일을 불러옵니다.
 import L from 'leaflet';
 
-// 아이콘 이미지 파일들을 import 합니다.
-import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
-import iconUrl from 'leaflet/dist/images/marker-icon.png';
-import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
-
-// --- 맛집 데이터 (대량 업데이트) ---
+// --- 맛집 데이터 (전체) ---
 const RESTAURANTS = [
   // 서울
   { name: "을지로 우육면관", lat: 37.5665, lng: 126.9900, region: "서울", address: "서울 중구 을지로 12길 34", myRating: 4.8, myReview: "육향 가득한 국물이 일품. 웨이팅이 길 수 있음." },
-  { name: "망원동 돈까스클럽", lat: 37.5551, lng: 126.9106, region: "서울", address: "서울 마포구 망원로 23", myRating: 4.5, myReview: "두툼하고 씹는 맛이 살아있는 진짜 돈까스." },
   { name: "금돼지식당", lat: 37.5589, lng: 127.0101, region: "서울", address: "서울 중구 다산로 149", myRating: 4.9, myReview: "육즙 가득한 본삼겹과 등목살이 유명한 곳. 미슐랭 빕 구르망 선정 맛집." },
   { name: "다운타우너 한남", lat: 37.5361, lng: 127.0022, region: "서울", address: "서울 용산구 대사관로5길 12", myRating: 4.6, myReview: "아보카도 버거가 시그니처 메뉴. 웨이팅이 길지만 맛은 보장." },
   { name: "깡통만두", lat: 37.5794, lng: 126.9855, region: "서울", address: "서울 종로구 북촌로2길 5-4", myRating: 4.7, myReview: "만두전골과 비빔국수가 맛있는, 안국역 근처 숨은 맛집." },
@@ -34,25 +29,22 @@ const RESTAURANTS = [
   { name: "산토리니", lat: 37.8643, lng: 127.7770, region: "강원도", address: "강원 춘천시 동면 순환대로 1154-97", myRating: 4.3, myReview: "춘천 구봉산 카페거리의 랜드마크. 그리스 산토리니를 연상시키는 멋진 뷰." },
 ];
 
-// --- Leaflet 아이콘 경로 설정 ---
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-    iconRetinaUrl: iconRetinaUrl,
-    iconUrl: iconUrl,
-    shadowUrl: shadowUrl,
-});
+// --- 커스텀 마커 아이콘 생성 ---
+const createCustomIcon = (isSelected) => {
+  return L.divIcon({
+    html: `<div class="marker-pin ${isSelected ? 'selected' : ''}"></div>`,
+    className: 'custom-marker-icon',
+    iconSize: [30, 42],
+    iconAnchor: [15, 42],
+    popupAnchor: [0, -35]
+  });
+};
 
-// --- 지도 뷰/이벤트 처리 컴포넌트 ---
+// --- 지도 컨트롤러 ---
 function MapController({ center, zoom, onMapClick }) {
   const map = useMap();
   map.setView(center, zoom);
-  
-  useMapEvents({
-    click: () => {
-      onMapClick();
-    }
-  });
-
+  useMapEvents({ click: () => onMapClick() });
   return null;
 }
 
@@ -60,12 +52,9 @@ export default function Maps() {
   const [selectedRegion, setSelectedRegion] = useState("서울");
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
 
-  // 지역별 중심 좌표
   const regionCenter = {
-    "서울": [37.5665, 126.9780],
-    "부산": [35.1796, 129.0756],
-    "경기도": [37.4138, 127.5183], // 경기도 중심 좌표 조정
-    "강원도": [37.8813, 127.7298],
+    "서울": [37.5665, 126.9780], "부산": [35.1796, 129.0756],
+    "경기도": [37.4138, 127.5183], "강원도": [37.8813, 127.7298],
   };
 
   const handleRegionChange = (region) => {
@@ -74,83 +63,66 @@ export default function Maps() {
   }
 
   return (
-    <div
-      style={{
-        maxWidth: 700,
-        margin: "60px auto",
-        background: "#181818",
-        borderRadius: 48,
-        padding: "48px 32px 32px 32px",
-        boxShadow: "0 8px 32px #0004",
-        color: "#fff",
-        textAlign: "center",
-      }}
-    >
-      <h1 style={{ fontSize: 38, fontWeight: 800, marginBottom: 24 }}>맛집 지도</h1>
+    <div className="maps-container">
+      <h1>맛집 지도</h1>
+      <p className="subtitle">지도 위의 핀을 클릭해보세요!</p>
       
-      <div style={{ marginBottom: 24, display: 'flex', justifyContent: 'center', gap: '10px', flexWrap: 'wrap' }}>
-        <button onClick={() => handleRegionChange("서울")} style={{ padding: '8px 16px', borderRadius: 8, border: 'none', background: selectedRegion === '서울' ? '#1976d2' : '#555', color: 'white', cursor: 'pointer' }}>서울</button>
-        <button onClick={() => handleRegionChange("부산")} style={{ padding: '8px 16px', borderRadius: 8, border: 'none', background: selectedRegion === '부산' ? '#1976d2' : '#555', color: 'white', cursor: 'pointer' }}>부산</button>
-        <button onClick={() => handleRegionChange("경기도")} style={{ padding: '8px 16px', borderRadius: 8, border: 'none', background: selectedRegion === '경기도' ? '#1976d2' : '#555', color: 'white', cursor: 'pointer' }}>경기도</button>
-        <button onClick={() => handleRegionChange("강원도")} style={{ padding: '8px 16px', borderRadius: 8, border: 'none', background: selectedRegion === '강원도' ? '#1976d2' : '#555', color: 'white', cursor: 'pointer' }}>강원도</button>
+      <div className="region-filters">
+        {Object.keys(regionCenter).map(region => (
+          <button
+            key={region}
+            onClick={() => handleRegionChange(region)}
+            className={`region-btn ${selectedRegion === region ? 'active' : ''}`}
+          >
+            {region}
+          </button>
+        ))}
       </div>
 
-      <MapContainer 
-        center={regionCenter[selectedRegion]} 
+      <MapContainer
+        center={regionCenter[selectedRegion]}
         zoom={10}
-        style={{ height: '400px', width: '100%', borderRadius: '32px', margin: '0 auto 32px auto' }}
+        style={{ height: '500px', width: '100%', borderRadius: '16px', margin: '0 auto 1.5rem auto', boxShadow: '0 8px 25px rgba(0,0,0,0.1)' }}
       >
-        <MapController 
-          center={regionCenter[selectedRegion]} 
-          zoom={10} 
+        <MapController
+          center={regionCenter[selectedRegion]}
+          zoom={10}
           onMapClick={() => setSelectedRestaurant(null)}
         />
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' />
+        {/* 지도를 원래의 밝은 색상으로 변경 */}
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        />
 
-        {RESTAURANTS.filter(r => r.region === selectedRegion).map((r) => (
-          <Marker 
+        {RESTAURANTS.filter(r => r.region === selectedRegion).map((r) => (
+          <Marker 
             key={r.name} 
             position={[r.lat, r.lng]}
+            icon={createCustomIcon(selectedRestaurant?.name === r.name)}
             eventHandlers={{ click: () => { setSelectedRestaurant(r); } }}
           >
-            <Popup>{r.name}</Popup>
-          </Marker>
-        ))}
-      </MapContainer>
+            <Popup>{r.name}</Popup>
+          </Marker>
+        ))}
+      </MapContainer>
 
-      <div style={{
-        height: selectedRestaurant ? '260px' : '0px',
-        overflow: 'hidden',
-        transition: 'height 0.4s ease-in-out',
-      }}>
+      <div className="details-panel-wrapper">
         {selectedRestaurant && (
-          <div style={{ background: '#222', borderRadius: 18, padding: '20px 24px', textAlign: 'left', position: 'relative' }}>
-            <button onClick={() => setSelectedRestaurant(null)} style={{ position: 'absolute', top: 12, right: 16, background: 'none', border: 'none', color: '#aaa', fontSize: 22, cursor: 'pointer' }}>×</button>
-            <div style={{ fontSize: 22, fontWeight: 700, marginBottom: 8 }}>{selectedRestaurant.name}</div>
-            <div style={{ fontSize: 14, color: '#ccc', marginBottom: 12 }}>📍 {selectedRestaurant.address}</div>
-            <div style={{ fontSize: 16, color: '#ffd600', marginBottom: 10 }}>평점: {selectedRestaurant.myRating} / 5.0</div>
-            <div style={{ fontSize: 15, lineHeight: 1.6 }}>{selectedRestaurant.myReview}</div>
+          <div className="details-panel">
+            <div className="details-panel-header">
+              <h2>{selectedRestaurant.name}</h2>
+              <span className="details-panel-rating">★ {selectedRestaurant.myRating}</span>
+            </div>
+            <p className="details-panel-address">📍 {selectedRestaurant.address}</p>
+            <p className="details-panel-review">{selectedRestaurant.myReview}</p>
           </div>
         )}
       </div>
 
-      <Link
-        to="/home"
-        style={{
-          display: "inline-block",
-          marginTop: 32,
-          padding: "10px 28px",
-          borderRadius: 24,
-          border: "1.5px solid #fff",
-          color: "#fff",
-          background: "none",
-          fontWeight: 500,
-          fontSize: 17,
-          textDecoration: "none",
-        }}
-      >
-        홈으로 돌아가기 ↗
-      </Link>
-    </div>
+      <Link to="/home" className="home-link-btn">
+        홈으로 돌아가기 ↗
+      </Link>
+    </div>
   );
 }

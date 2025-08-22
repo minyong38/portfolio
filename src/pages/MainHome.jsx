@@ -210,7 +210,7 @@ function WindowsHome({ onToggle }) {
           <div className="flex items-center justify-between h-10 px-4 bg-[#f3f3f3] border-b border-gray-300 rounded-t-3xl">
             <div className="flex items-center space-x-2">
               <img src="/icons/win/edge.png" className="w-4 h-4" alt="edge" />
-              <span className="text-sm text-black/90">Vite + React</span>
+              <span className="text-sm text-black/90">Meenyong</span>
             </div>
             <div className="flex items-center space-x-3 text-gray-600 text-sm">
               <button aria-label="minimize">—</button>

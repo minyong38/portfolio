@@ -1,0 +1,121 @@
+/* 전체 뮤직 페이지 컨테이너 */
+.music-container {
+  max-width: 800px;
+  margin: 4rem auto;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 2rem 2.5rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  color: #333;
+}
+
+.music-container h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.music-container p.subtitle {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  margin-bottom: 2.5rem;
+}
+
+/* 노래 목록 컨테이너 */
+.song-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+}
+
+/* 각 노래 카드 */
+.song-card {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  margin-bottom: 0.75rem;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  transition: all 0.2s ease-in-out;
+}
+
+.song-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+  border-color: #dee2e6;
+}
+
+.song-number {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #adb5bd;
+  width: 40px;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.song-info {
+  flex-grow: 1;
+  text-align: left;
+  padding: 0 1rem;
+}
+
+.song-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #34495e;
+  margin: 0 0 0.25rem 0;
+}
+
+.song-artist {
+  font-size: 0.95rem;
+  color: #7f8c8d;
+  margin: 0;
+}
+
+/* 유튜브 재생 버튼 */
+.youtube-play-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ff0000;
+  color: white;
+  font-size: 1.2rem;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 10px rgba(255, 0, 0, 0.2);
+}
+
+.youtube-play-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(255, 0, 0, 0.3);
+}
+
+/* 홈으로 돌아가기 버튼 (Maps.css와 동일) */
+.home-link-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 999px;
+  border: 1.5px solid #007bff;
+  color: #007bff;
+  background: none;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.home-link-btn:hover {
+  background: #007bff;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 123, 255, 0.25);
+}
