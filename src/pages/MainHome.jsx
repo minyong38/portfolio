@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
  *  Mac 레이아웃 (요청하신 버전 그대로 유지, 그리드 크기 확대)
  *  ------------------------- */
 const ALL_APPS_MAC = [
-  { name: "Gallery", url: "#", cat: "Media", icon: "icons/photo.png" },
+  { name: "Gallery", url: "/gallery", cat: "Media", icon: "icons/photo.png" },
   { name: "Maps", url: "#", cat: "Tools", icon: "icons/maps.png" },
   { name: "Instagram", url: "https://instagram.com/", cat: "Social", icon: "icons/instagram.png" },
   { name: "Music", url: "#", cat: "Media", icon: "icons/music.png" },
@@ -15,9 +15,9 @@ const ALL_APPS_MAC = [
  *  Windows 레이아웃 전용 데이터 (샘플)
  *  ------------------------- */
 const ALL_APPS_WIN = [
-  { name: "Photos", url: "#", cat: "Media", icon: "icons/win/photos.png" },
+  { name: "Photos", url: "/gallery", cat: "Media", icon: "icons/win/photos.png" },
   { name: "Maps", url: "#", cat: "Tools", icon: "icons/win/maps.png" },
-  { name: "Instagram", url: "https://instagram.com/", cat: "Social", icon: "icons/win/instagram.png" },
+  { name: "Instagram", url: "https://www.instagram.com/meee__nyong/", cat: "Social", icon: "icons/win/instagram.png" },
   { name: "Music", url: "#", cat: "Media", icon: "icons/win/music.png" },
 ];
 
@@ -95,33 +95,41 @@ function MacHome({ onToggle }) {
             </div>
           </div>
 
-          {/* 앱 그리드 (크게 확대) */}
+          {/* 앱 그리드  */}
           <div className="px-16 pb-16 pt-10">
             <div className="grid grid-cols-4 sm:grid-cols-5 gap-x-16 gap-y-16 justify-items-center">
               {apps.map(app => {
                 const base = import.meta.env.BASE_URL;
                 const external = app.url.startsWith("http");
+                
+                // 내부 링크일 경우 사용할 Link 컴포넌트
+                if (!external) {
+                  return (
+                    <Link
+                      key={app.name}
+                      to={app.url} 
+                      onMouseEnter={() => setHoverUrl(app.name)}
+                      onMouseLeave={() => setHoverUrl("")}
+                      className="flex flex-col items-center space-y-4"
+                    >
+                      <img src={`${base}${app.icon}`} alt={app.name} className="w-24 h-24 object-contain" />
+                      <div className="text-[15px] sm:text-[16px] text-white/90">{app.name}</div>
+                    </Link>
+                  );
+                }
+
+
                 return (
                   <a
                     key={app.name}
                     href={app.url}
-                    target={external ? "_blank" : undefined}
-                    rel={external ? "noreferrer" : undefined}
+                    target="_blank"
+                    rel="noreferrer"
                     onMouseEnter={() => setHoverUrl(app.url.replace(/^https?:\/\//, ""))}
                     onMouseLeave={() => setHoverUrl("")}
                     className="flex flex-col items-center space-y-4"
                   >
-                    
-                    <img src={`${base}${app.icon}`} alt={app.name}
-                      className="w-24 h-24 object-contain"
-                      onError={(e) => {
-                        e.currentTarget.style.display = 'none';
-                        const fallback = document.createElement('span');
-                        fallback.style.fontSize = '32px';
-                        fallback.textContent = '❔';
-                        e.currentTarget.parentElement?.appendChild(fallback);
-                      }}
-                    />
+                    <img src={`${base}${app.icon}`} alt={app.name} className="w-24 h-24 object-contain" />
                     <div className="text-[15px] sm:text-[16px] text-white/90">{app.name}</div>
                   </a>
                 );
@@ -222,27 +230,38 @@ function WindowsHome({ onToggle }) {
               {apps.map(app => {
                 const base = import.meta.env.BASE_URL;
                 const external = app.url.startsWith("http");
+
+                // 내부 링크일 경우 (<Link> 사용)
+                if (!external) {
+                  return (
+                    <Link
+                      key={app.name}
+                      to={app.url}
+                      onMouseEnter={() => setHoverUrl(app.name)}
+                      onMouseLeave={() => setHoverUrl("")}
+                      className="flex flex-col items-center space-y-4 group" // group 클래스 추가
+                    >
+                      <div className="w-28 h-28 rounded-xl bg-white border border-gray-200 flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.1)]">
+                        <img src={`${base}${app.icon}`} alt={app.name} className="w-24 h-24 object-contain transition-transform duration-300 ease-in-out group-hover:scale-110" />
+                      </div>
+                      <div className="text-[15px] sm:text-[16px] text-black/80">{app.name}</div>
+                    </Link>
+                  );
+                }
+
+                // 외부 링크일 경우 (<a> 사용)
                 return (
                   <a
                     key={app.name}
                     href={app.url}
-                    target={external ? "_blank" : undefined}
-                    rel={external ? "noreferrer" : undefined}
+                    target="_blank"
+                    rel="noreferrer"
                     onMouseEnter={() => setHoverUrl(app.url.replace(/^https?:\/\//, ""))}
                     onMouseLeave={() => setHoverUrl("")}
-                    className="flex flex-col items-center space-y-4"
+                    className="flex flex-col items-center space-y-4 group" // group 클래스 추가
                   >
                     <div className="w-28 h-28 rounded-xl bg-white border border-gray-200 flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.1)]">
-                      <img src={`${base}${app.icon}`} alt={app.name} 
-                        className="w-24 h-24 object-contain transition-transform duration-300 ease-in-out group-hover:scale-110"
-                        onError={(e) => {
-                          e.currentTarget.style.display = 'none';
-                          const fallback = document.createElement('span');
-                          fallback.style.fontSize = '32px';
-                          fallback.textContent = '❔';
-                          e.currentTarget.parentElement?.appendChild(fallback);
-                        }}
-                      />
+                      <img src={`${base}${app.icon}`} alt={app.name} className="w-24 h-24 object-contain transition-transform duration-300 ease-in-out group-hover:scale-110" />
                     </div>
                     <div className="text-[15px] sm:text-[16px] text-black/80">{app.name}</div>
                   </a>
