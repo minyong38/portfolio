@@ -1,6 +1,7 @@
 import { useMemo, useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+// 앱 목록(맥/윈도우)
 const ALL_APPS_MAC = [
   { name: "Gallery", url: "/gallery", cat: "Media", icon: "icons/photo.png" },
   { name: "Maps", url: "/maps", cat: "Tools", icon: "icons/maps.png" },
@@ -18,7 +19,7 @@ const ALL_APPS_WIN = [
 ];
 
 export default function MainHome() {
-  const [os, setOs] = useState("mac"); // "mac" | "windows"
+  const [os, setOs] = useState("mac"); // 현재 OS 상태 ("mac" 또는 "windows")
   return (
     <UnifiedHome
       os={os}
@@ -28,17 +29,19 @@ export default function MainHome() {
 }
 
 function UnifiedHome({ os, onToggle }) {
-  const [q, setQ] = useState("");
-  const [hoverUrl, setHoverUrl] = useState("");
+  const [q, setQ] = useState(""); // 검색어 상태
+  const [hoverUrl, setHoverUrl] = useState(""); // 아이콘 hover 시 주소 표시
   const inputRef = useRef(null);
   const navigate = useNavigate();
 
+  // 검색어에 따라 앱 필터링
   const apps = useMemo(() => {
     const query = q.trim().toLowerCase();
     const data = os === "mac" ? ALL_APPS_MAC : ALL_APPS_WIN;
     return query ? data.filter(a => a.name.toLowerCase().includes(query)) : data;
   }, [q, os]);
 
+  // 단축키(/, ESC)로 검색창 포커스/초기화
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === "/" && document.activeElement !== inputRef.current) {
@@ -54,7 +57,7 @@ function UnifiedHome({ os, onToggle }) {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  // OS별 스타일
+  // 스타일 관련 변수들
   const isMac = os === "mac";
   const bgClass = isMac
     ? "bg-home-gradient"
@@ -83,23 +86,32 @@ function UnifiedHome({ os, onToggle }) {
 
   return (
     <main className={`min-h-screen relative flex flex-col ${bgClass}`}>
-      {/* OS 토글 버튼 */}
+      {/* OS 토글 버튼 (Mac/Windows 전환, 동그란 원이 좌우로 이동) */}
       <div className="absolute top-4 right-4 z-10">
         <button
           onClick={onToggle}
           className={`group flex items-center w-28 sm:w-36 h-10 rounded-full ${
             isMac ? "bg-white/90 text-black" : "bg-white text-black"
-          } shadow-lg px-1 transition-all duration-300 text-sm sm:text-base`}
+          } shadow-lg px-1 transition-all duration-300 text-sm sm:text-base relative`}
           aria-label={isMac ? "Switch to Windows" : "Switch to Mac"}
         >
-          <span className="inline-block w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-neutral-400 shadow" />
-          <span className="flex-1 text-center font-medium">
+          {/* 토글 원: OS에 따라 좌우 이동 */}
+          <span
+            className={`
+              absolute top-1 left-1
+              w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-neutral-400 shadow
+              transition-all duration-300
+              ${isMac ? "translate-x-0" : "translate-x-[60px] sm:translate-x-[88px]"}
+            `}
+          />
+          {/* OS 텍스트 */}
+          <span className="flex-1 text-center font-medium z-10">
             {isMac ? "Mac" : "Windows"}
           </span>
         </button>
       </div>
 
-      {/* 중앙 패널 */}
+      {/* 중앙 패널 (앱 그리드, 상단바 등) */}
       <section className="flex-1 w-full flex items-center justify-center py-4 sm:py-10">
         <div
           className={`${panelBg} ${panelShadow} w-full max-w-[1280px] mx-2 sm:mx-auto`}
@@ -109,18 +121,20 @@ function UnifiedHome({ os, onToggle }) {
             <div className="flex items-center gap-2 sm:gap-3 px-2 sm:px-6 pt-4 sm:pt-6">
               {isMac ? (
                 <>
+                  {/* Mac 스타일: 좌측 동그라미, 주소+검색창 */}
                   <div className="flex items-center gap-1">
                     <span className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-[#ff5f56]" />
                     <span className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-[#ffbd2e]" />
                     <span className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-[#27c93f]" />
                   </div>
-                  {/* 주소+검색창 합쳐진 형태 */}
+                  {/* 주소+검색창 */}
                   <div
                     className={`flex-1 h-10 sm:h-12 rounded-full ${addressBg} flex items-center px-3 sm:px-5 text-base sm:text-lg shadow-inner`}
                   >
                     <span className="opacity-70 mr-2">https://</span>
                     <span className="truncate">{hoverUrl || "select an app…"}</span>
                   </div>
+                  {/* 검색 입력창 */}
                   <div className="relative">
                     <input
                       ref={inputRef}
@@ -133,13 +147,14 @@ function UnifiedHome({ os, onToggle }) {
                 </>
               ) : (
                 <>
-                  {/* 윈도우: 타이틀바 + 주소창 */}
+                  {/* Windows 스타일: 타이틀바 + 주소창 */}
                   <div className="flex flex-col gap-0 flex-1">
                     {/* 타이틀바 */}
                     <div className="flex items-center h-8 sm:h-9 px-2 sm:px-3 bg-[#ededed] border-t border-x border-b-0 border-gray-300 rounded-t-xl select-none">
                       <img src="/icons/win/edge.png" className="w-4 h-4 sm:w-5 sm:h-5 mr-2" alt="edge" />
                       <span className="text-[13px] sm:text-[15px] text-black/80 font-medium flex-1 truncate">Meenyong Portfolio</span>
                       <div className="flex items-center gap-0.5 sm:gap-1 ml-2">
+                        {/* 최소화/최대화/닫기 버튼 */}
                         <button className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center hover:bg-gray-200 rounded transition">
                           <svg width="16" height="16"><rect x="3" y="12" width="10" height="2" rx="1" fill="#222"/></svg>
                         </button>
@@ -166,13 +181,14 @@ function UnifiedHome({ os, onToggle }) {
               )}
             </div>
           </div>
-          {/* 앱 그리드 */}
+          {/* 앱 그리드 (아이콘 목록, hover 시 주소 표시) */}
           <div className="px-2 sm:px-16 pb-8 sm:pb-16 pt-6 sm:pt-10">
             <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-x-6 gap-y-8 sm:gap-x-16 sm:gap-y-16 justify-items-center">
               {apps.map((app, idx) => {
                 const base = import.meta.env.BASE_URL;
                 const external = app.url.startsWith("http");
 
+                // 아이콘 hover 시 주소 표시
                 const handleMouseEnter = () => {
                   setHoverUrl(
                     external
