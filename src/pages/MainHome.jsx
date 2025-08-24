@@ -204,6 +204,7 @@ function UnifiedHome({ os, onToggle }) {
                 const iconImg =
                   "w-12 h-12 sm:w-24 sm:h-24 object-contain transition-transform duration-300 ease-in-out group-hover:scale-110";
 
+                // 기존: 아이콘 뒤에 흰색 배경 div(iconBox) → 삭제, img만 남김
                 if (!external) {
                   return (
                     <Link
@@ -214,13 +215,12 @@ function UnifiedHome({ os, onToggle }) {
                       className="flex flex-col items-center space-y-2 sm:space-y-4 group"
                       style={{ transition: "all 0.3s" }}
                     >
-                      <div className={iconBox}>
-                        <img
-                          src={`${base}${app.icon}`}
-                          alt={app.name}
-                          className={iconImg}
-                        />
-                      </div>
+                      {/* 아이콘 배경 div 제거, img만 */}
+                      <img
+                        src={`${base}${app.icon}`}
+                        alt={app.name}
+                        className={iconImg}
+                      />
                       <div className={`text-[13px] sm:text-[15px] md:text-[16px] ${gridText}`}>
                         {app.name}
                       </div>
@@ -239,13 +239,12 @@ function UnifiedHome({ os, onToggle }) {
                     className="flex flex-col items-center space-y-2 sm:space-y-4 group"
                     style={{ transition: "all 0.3s" }}
                   >
-                    <div className={iconBox}>
-                      <img
-                        src={`${base}${app.icon}`}
-                        alt={app.name}
-                        className={iconImg}
-                      />
-                    </div>
+                    {/* 아이콘 배경 div 제거, img만 */}
+                    <img
+                      src={`${base}${app.icon}`}
+                      alt={app.name}
+                      className={iconImg}
+                    />
                     <div className={`text-[13px] sm:text-[15px] md:text-[16px] ${gridText}`}>
                       {app.name}
                     </div>
