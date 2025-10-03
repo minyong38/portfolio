@@ -6,7 +6,16 @@
     <title>Not Found</title>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <noscript>JavaScript가 필요합니다.</noscript>
+    <script>
+      // SPA fallback for GitHub Pages: redirect to `?/real-path` under repo base
+      (function(l){
+        var parts = l.pathname.split('/').filter(Boolean);
+        var base = parts.length ? '/' + parts[0] : '';
+        var remainder = l.pathname.slice(base.length);
+        var newPath = base + '/?/' + remainder.replace(/^\//,'') + l.search + l.hash;
+        l.replace(newPath);
+      })(window.location);
+    </script>
   </body>
-</html>
+  </html>
