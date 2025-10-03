@@ -4,7 +4,6 @@ export default function Navbar() {
   const items = [
     { href: "#about", label: "About" },
     { href: "#skills", label: "Skills" },
-    { href: "#awards", label: "Awards" },
     { href: "#certs", label: "Certificates" },
     { href: "#exp", label: "Experience" },
     { href: "#contact", label: "Contact" },

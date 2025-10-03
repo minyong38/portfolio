@@ -36,20 +36,16 @@ export default function ProjectFireOverview() {
 
   const slideIds = [
     "hero",
-    "overview","features","stack",
-    "goals","roles",
+    "overview","features",
     "firmware","backend","frontend",
     "arch","ml",
     "challenges","results","learnings",
-    "api","shots","video","thanks"
+    "api","shots","video","stack","thanks"
   ];
   const slideMeta = [
     { id: "hero",       title: "Intro",           bgClass: "bg-gradient-to-br from-brand to-cyan-600" },
     { id: "overview",   title: "Overview",        pattern: 'rgba(255,255,255,.04)' },
     { id: "features",   title: "Features",        pattern: 'rgba(255,255,255,.03)' },
-    { id: "stack",      title: "Stack",           pattern: 'rgba(255,255,255,.04)' },
-    { id: "goals",      title: "Goals",           pattern: 'rgba(255,255,255,.04)' },
-    { id: "roles",      title: "Roles",           bgClass: "bg-[#0f1620]", pattern: 'rgba(255,255,255,.03)' },
     { id: "firmware",   title: "Firmware",        pattern: 'rgba(255,255,255,.04)' },
     { id: "backend",    title: "Backend",         bgClass: "bg-[#0f1620]", pattern: 'rgba(255,255,255,.03)' },
     { id: "frontend",   title: "Frontend",        pattern: 'rgba(255,255,255,.04)' },
@@ -61,6 +57,7 @@ export default function ProjectFireOverview() {
     { id: "api",        title: "API & Events",    pattern: 'rgba(255,255,255,.04)' },
     { id: "shots",      title: "Screenshots",     bgClass: "bg-[#0f1620]", pattern: 'rgba(255,255,255,.03)' },
     { id: "video",      title: "Demo Video",      pattern: 'rgba(255,255,255,.04)' },
+    { id: "stack",      title: "Stack",           pattern: 'rgba(255,255,255,.04)' },
     { id: "thanks",     title: "Thanks",          bgClass: "bg-[#0f1620]", pattern: 'rgba(255,255,255,.03)' },
   ];
   const containerRef = useRef(null);
@@ -237,100 +234,108 @@ export default function ProjectFireOverview() {
       {/* Overview */}
       <Slide id="overview" patternStyle={pattern('rgba(255,255,255,.04)')}>
         <h2 className="text-white text-4xl sm:text-5xl font-extrabold mb-6">프로젝트 개요</h2>
-        <p className="text-gray-200 text-xl mx-auto max-w-4xl leading-relaxed">
-          기존 화재경보기의 한계(임계치 기반 사후 대응, 인원 현황 파악 불가)를 극복하기 위해,
-          IoT 센서 데이터 + AI 예측 모델 + 외부 재실 시스템 API를 통합하여 선제적 안전 관리와 실시간 시각화를 제공하는
-          중앙 관제 대시보드를 구축했습니다.
-        </p>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-8 mx-auto max-w-4xl">
+          {/* 이모지 영역 */}
+          <div className="flex flex-row sm:flex-col gap-6 sm:gap-8 items-center sm:items-start text-4xl">
+            <span className="bg-white/10 rounded-full p-4">🛰️</span>
+            <span className="bg-white/10 rounded-full p-4">🤖</span>
+            <span className="bg-white/10 rounded-full p-4">🔗</span>
+          </div>
+          {/* 설명 영역 */}
+          <div className="text-gray-200 text-xl leading-relaxed text-left">
+            <div className="mb-3">
+              <span className="font-bold text-white">문제점</span> <span className="ml-2">🚨</span><br />
+              기존 화재경보기는 임계치 기반의 사후 대응과 인원 현황 파악의 한계가 있었습니다.
+            </div>
+            <div className="mb-3">
+              <span className="font-bold text-white">솔루션</span> <span className="ml-2">💡</span><br />
+              <b className="text-brand">🛰️ IoT 센서 데이터</b>, <b className="text-cyan-400">🤖 AI 예측 모델</b>, <b className="text-yellow-300">🔗 외부 재실 시스템 API</b>를 통합하여
+              <br /><b>선제적 안전 관리</b>와 <b>실시간 시각화</b>가 가능한 중앙 관제 대시보드를 구축했습니다.
+            </div>
+            <div>
+              <span className="font-bold text-white">성과</span> <span className="ml-2">🏆</span><br />
+              실시간 데이터 기반의 <b>화재·재실 통합 모니터링</b>과 <b>즉각적 대응</b>이 가능해졌습니다.
+            </div>
+          </div>
+        </div>
       </Slide>
 
       {/* Features */}
       <Slide id="features" bg="bg-[#0f1620]" patternStyle={pattern('rgba(255,255,255,.03)')}>
         <h2 className="text-white text-4xl sm:text-5xl font-extrabold mb-6">주요 기능</h2>
-        <ul className="list-disc list-inside mx-auto max-w-4xl space-y-4 text-gray-200 text-xl">
-          <li className="stagger-item" style={{animationDelay:'60ms'}}>
-            <b>다중 센서 모니터링</b> — ESP32 기반 노드에서 온도·습도·eCO2·TVOC·연기·CO 데이터를 1초 단위로 수집 및 실시간 시각화
+        <ul className="list-none mx-auto max-w-4xl space-y-5 text-gray-200 text-xl text-left">
+          <li className="flex items-start gap-3 stagger-item" style={{animationDelay:'60ms'}}>
+            <span className="text-3xl bg-white/10 rounded-full p-2">📡</span>
+            <div>
+              <b className="text-brand">다중 센서 모니터링</b><br />
+              ESP32 기반 노드에서 온도·습도·eCO2·TVOC·연기·CO 데이터를 1초 단위로 수집 및 실시간 시각화
+            </div>
           </li>
-          <li className="stagger-item" style={{animationDelay:'140ms'}}>
-            <b>AI 기반 화재 예측</b> — Random Forest로 위험도 예측(임계치 방식 대비 정밀)
+          <li className="flex items-start gap-3 stagger-item" style={{animationDelay:'140ms'}}>
+            <span className="text-3xl bg-white/10 rounded-full p-2">🔥</span>
+            <div>
+              <b className="text-cyan-400">AI 기반 화재 예측</b><br />
+              Random Forest로 위험도 예측(임계치 방식 대비 정밀)
+            </div>
           </li>
-          <li className="stagger-item" style={{animationDelay:'220ms'}}>
-            <b>재실자 감지 연동</b> — Home Assistant API로 구역별 실시간 인원 현황 통합 표시
+          <li className="flex items-start gap-3 stagger-item" style={{animationDelay:'220ms'}}>
+            <span className="text-3xl bg-white/10 rounded-full p-2">👥</span>
+            <div>
+              <b className="text-yellow-300">재실자 감지 연동</b><br />
+              Home Assistant API로 구역별 실시간 인원 현황 통합 표시
+            </div>
           </li>
-          <li className="stagger-item" style={{animationDelay:'300ms'}}>
-            <b>통합 관제 대시보드</b> — 센서 데이터·AI 결과·재실 현황을 단일 화면에서 확인
+          <li className="flex items-start gap-3 stagger-item" style={{animationDelay:'300ms'}}>
+            <span className="text-3xl bg-white/10 rounded-full p-2">🖥️</span>
+            <div>
+              <b className="text-green-300">통합 관제 대시보드</b><br />
+              센서 데이터·AI 결과·재실 현황을 단일 화면에서 확인
+            </div>
           </li>
-          <li className="stagger-item" style={{animationDelay:'380ms'}}>
-            <b>영역 매핑 & 경보</b> — 화재 발생 시 해당 영역 색상 빨간색으로 변경해 즉각 인지
+          <li className="flex items-start gap-3 stagger-item" style={{animationDelay:'380ms'}}>
+            <span className="text-3xl bg-white/10 rounded-full p-2">🗺️</span>
+            <div>
+              <b className="text-red-400">영역 매핑 & 경보</b><br />
+              화재 발생 시 해당 영역 색상 빨간색으로 변경해 즉각 인지
+            </div>
           </li>
-          <li className="stagger-item" style={{animationDelay:'460ms'}}>
-            <b>센서 관리 페이지</b> — ESP/재실/유도등/영역 생성·편집 → DB 저장 → 대시보드 매핑
+          <li className="flex items-start gap-3 stagger-item" style={{animationDelay:'460ms'}}>
+            <span className="text-3xl bg-white/10 rounded-full p-2">⚙️</span>
+            <div>
+              <b className="text-purple-300">센서 관리 페이지</b><br />
+              ESP/재실/유도등/영역 생성·편집 → DB 저장 → 대시보드 매핑
+            </div>
           </li>
         </ul>
       </Slide>
 
-      {/* Stack */}
-      <Slide id="stack" patternStyle={pattern('rgba(255,255,255,.04)')}>
-        <h2 className="text-white text-4xl sm:text-5xl font-extrabold mb-6">기술 스택</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mx-auto max-w-5xl text-left">
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
-            <h3 className="text-white font-semibold mb-2">하드웨어</h3>
-            <p className="text-gray-200">ESP32‑C3, SHT31, SGP30, MQ‑2, MQ‑7</p>
-            <h3 className="text-white font-semibold mt-4 mb-2">개발환경</h3>
-            <p className="text-gray-200">VS Code + PlatformIO (빌드/USB 업로드)</p>
-            <h3 className="text-white font-semibold mt-4 mb-2">백엔드</h3>
-            <p className="text-gray-200">Python, Flask, Flask‑SocketIO, MySQL, SQLAlchemy</p>
-          </div>
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
-            <h3 className="text-white font-semibold mb-2">AI/ML</h3>
-            <p className="text-gray-200">Scikit‑learn(Random Forest), Pandas, NumPy</p>
-            <h3 className="text-white font-semibold mt-4 mb-2">프론트엔드</h3>
-            <p className="text-gray-200">Vue(Nuxt), Chart.js, Axios, Socket.IO‑Client</p>
-            <h3 className="text-white font-semibold mt-4 mb-2">외부 연동</h3>
-            <p className="text-gray-200">Home Assistant REST API</p>
-          </div>
-        </div>
-      </Slide>
-
-      {/* Goals */}
-      <Slide id="goals" patternStyle={pattern('rgba(255,255,255,.04)')}>
-        <h2 className="text-white text-4xl sm:text-5xl font-extrabold mb-6">프로젝트 목표</h2>
-        <ul className="list-disc list-inside mx-auto max-w-3xl space-y-4 text-gray-200 text-xl">
-          <li className="stagger-item" style={{animationDelay:'60ms'}}>건물 내 화재 감지와 재실자 감지를 통합적으로 모니터링</li>
-          <li className="stagger-item" style={{animationDelay:'140ms'}}>관제 화면에서 영역별 화재 여부와 재실 상황 실시간 확인</li>
-          <li className="stagger-item" style={{animationDelay:'220ms'}}>유도등 연동으로 최적 대피 경로 안내 기능 확장</li>
-        </ul>
-      </Slide>
-
-      {/* Roles */}
-      <Slide id="roles" bg="bg-[#0f1620]" patternStyle={pattern('rgba(255,255,255,.03)')}>
-        <h2 className="text-white text-4xl sm:text-5xl font-extrabold mb-6">역할 (Full‑stack)</h2>
-        <ul className="list-disc list-inside mx-auto max-w-3xl space-y-4 text-gray-200 text-xl">
-          <li className="stagger-item" style={{animationDelay:'60ms'}}>ESP32 펌웨어(PlatformIO), 빌드/업로드 파이프라인 구성</li>
-          <li className="stagger-item" style={{animationDelay:'140ms'}}>프론트(Vue): 센서/영역/유도등 관리 UI, 관제 대시보드</li>
-          <li className="stagger-item" style={{animationDelay:'220ms'}}>백엔드(Flask): 센서 이벤트 수집·분석·실시간 전파(Socket.IO)</li>
-        </ul>
-      </Slide>
 
       {/* Firmware / Edge */}
       <Slide id="firmware" patternStyle={pattern('rgba(255,255,255,.04)')}>
-        <h2 className="text-white text-4xl sm:text-5xl font-extrabold mb-6">펌웨어(ESP32)</h2>
-        <ul className="list-disc list-inside mx-auto max-w-4xl space-y-3 text-gray-200 text-xl">
-          <li className="stagger-item" style={{animationDelay:'60ms'}}>센서 수집: 온도/습도, eCO2/TVOC, 가스(MQ2) 주기 측정</li>
-          <li className="stagger-item" style={{animationDelay:'140ms'}}>잡음 저감: 이동평균/히스테리시스 적용, 임계치 사전 판정</li>
-          <li className="stagger-item" style={{animationDelay:'220ms'}}>전송: Wi‑Fi 연결 복구/재시도, JSON POST로 서버에 업링크</li>
+        <h2 className="text-white text-4xl sm:text-5xl font-extrabold mb-6 mt-0">펌웨어(ESP32)</h2>
+        <ul className="list-none mx-auto max-w-4xl space-y-5 text-gray-200 text-xl text-left">
+          <li className="flex items-start gap-3 stagger-item" style={{animationDelay:'60ms'}}>
+            <span className="text-3xl bg-white/10 rounded-full p-2">🌡️</span>
+            <div>
+              <b className="text-brand">센서 수집</b><br />
+              온도/습도, eCO2/TVOC, 가스(MQ2) 등 주기 측정
+            </div>
+          </li>
+          <li className="flex items-start gap-3 stagger-item" style={{animationDelay:'140ms'}}>
+            <span className="text-3xl bg-white/10 rounded-full p-2">🔉</span>
+            <div>
+              <b className="text-cyan-400">잡음 저감</b><br />
+              이동평균·히스테리시스 적용, 임계치 사전 판정
+            </div>
+          </li>
+          <li className="flex items-start gap-3 stagger-item" style={{animationDelay:'220ms'}}>
+            <span className="text-3xl bg-white/10 rounded-full p-2">📶</span>
+            <div>
+              <b className="text-yellow-300">데이터 전송</b><br />
+              Wi‑Fi 연결 복구/재시도, JSON POST로 서버 업링크
+            </div>
+          </li>
         </ul>
-        <div className="mx-auto max-w-4xl mt-5 text-left bg-white/5 border border-white/10 rounded-lg p-4 text-sm sm:text-base text-gray-200">
-{`// payload 예시 (POST /data)
-{
-  "device_id": "BOARD_1",
-  "temperature": 28.7,
-  "humidity": 53.8,
-  "eco2": 420,
-  "tvoc": 18,
-  "gas": 0.93
-}`}
-        </div>
       </Slide>
 
       {/* Backend / DB */}
@@ -463,6 +468,29 @@ export default function ProjectFireOverview() {
         <video controls className="w-full rounded-lg border border-white/10 bg-black" onError={(e)=>{e.currentTarget.style.display='none';}}>
           <source src={`${base}projects/fire/demo.mp4`} type="video/mp4" />
         </video>
+      </Slide>
+
+      {/* Stack */}
+      <Slide id="stack" patternStyle={pattern('rgba(255,255,255,.04)')}>
+        <h2 className="text-white text-4xl sm:text-5xl font-extrabold mb-6">기술 스택</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mx-auto max-w-5xl text-left">
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+            <h3 className="text-white font-semibold mb-2">하드웨어</h3>
+            <p className="text-gray-200">ESP32‑C3, SHT31, SGP30, MQ‑2, MQ‑7</p>
+            <h3 className="text-white font-semibold mt-4 mb-2">개발환경</h3>
+            <p className="text-gray-200">VS Code + PlatformIO (빌드/USB 업로드)</p>
+            <h3 className="text-white font-semibold mt-4 mb-2">백엔드</h3>
+            <p className="text-gray-200">Python, Flask, Flask‑SocketIO, MySQL, SQLAlchemy</p>
+          </div>
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+            <h3 className="text-white font-semibold mb-2">AI/ML</h3>
+            <p className="text-gray-200">Scikit‑learn(Random Forest), Pandas, NumPy</p>
+            <h3 className="text-white font-semibold mt-4 mb-2">프론트엔드</h3>
+            <p className="text-gray-200">Vue(Nuxt), Chart.js, Axios, Socket.IO‑Client</p>
+            <h3 className="text-white font-semibold mt-4 mb-2">외부 연동</h3>
+            <p className="text-gray-200">Home Assistant REST API</p>
+          </div>
+        </div>
       </Slide>
 
       {/* Thanks */}

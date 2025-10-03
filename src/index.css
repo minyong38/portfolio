@@ -174,6 +174,9 @@ body { @apply bg-base text-ink font-ui antialiased; }
 /* Staggered list items */
 .stagger-item { opacity: 0; transform: translateY(12px); animation: firefade .55s ease both; }
 
+/* Fix: hide legacy garbled heading in fire overview (we render a new one) */
+.fire-slide#overview .slide-appear > h2:not([class]) { display: none; }
+
 /* Simple parallax hook (transform via CSS var) */
 .parallax-elm { transform: translateY(var(--py, 0px)); will-change: transform; }
 
@@ -191,5 +194,41 @@ body { @apply bg-base text-ink font-ui antialiased; }
   --thumbs-item-h: calc((100vh - 48px - (var(--thumbs-visible) - 1) * var(--thumbs-gap)) / var(--thumbs-visible));
 }
 .thumb-card { height: var(--thumbs-item-h); }
+
+/* === Scroll reveal (appear from bottom, hide on exit) === */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 600ms cubic-bezier(.22,.61,.36,1), transform 600ms cubic-bezier(.22,.61,.36,1);
+  will-change: opacity, transform;
+}
+.reveal-up.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-up { transition: none; opacity: 1; transform: none; }
+}
+
+/* === Focus section (emphasize one at a time) === */
+.focus-section {
+  opacity: .45;
+  transform: scale(.985);
+  filter: saturate(.9);
+  transition: opacity 360ms cubic-bezier(.22,.61,.36,1),
+              transform 360ms cubic-bezier(.22,.61,.36,1),
+              filter 360ms linear;
+  will-change: opacity, transform, filter;
+}
+.focus-section.in-focus {
+  opacity: 1;
+  transform: scale(1);
+  filter: saturate(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .focus-section { transition: none; opacity: 1; transform: none; filter: none; }
+}
+
+/* (removed) Section-by-section snap scrolling */
 
 

@@ -1,7 +1,7 @@
 /* --- Hero Section General Styles --- */
 .hero {
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-  position: relative; 
+  position: relative;
 }
 
 .hero-title {
@@ -11,7 +11,7 @@
   line-height: 1.2;
 }
 
-/* "Frontend Developer"에만 적용될 예쁜 색상과 그림자 효과 */
+/* Glow for the second line */
 .hero-title .glow {
   color: #36e2ff;
   text-shadow: 0 0 24px #00eaff99, 0 0 8px #36e2ff99, 0 0 2px #fff;
@@ -19,7 +19,7 @@
   opacity: 1 !important;
 }
 
-/* --- Reveal Text Animation (한글 라인만) --- */
+/* --- Reveal Text Animation --- */
 .reveal-text span {
   display: inline-block;
   opacity: 0;
@@ -35,7 +35,7 @@
   }
 }
 
-/* --- 순차적 등장 애니메이션 --- */
+/* --- Sequential Appear --- */
 .sequential-fade-in {
   opacity: 0;
   transform: translateY(20px);
@@ -48,7 +48,7 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- 스크롤 안내 아이콘 --- */
+/* --- Scroll Cue --- */
 .scrollcue {
   display: flex; flex-direction: column; align-items: center;
   gap: 8px; text-decoration: none; color: white;
@@ -63,34 +63,46 @@
   50% { transform: translateY(4px); }
 }
 
-/* --- 인터랙티브 마우스 흔적 스타일 --- */
-.mouse-trail-container {
-  position: absolute; top: 0; left: 0;
-  width: 100%; height: 100%;
-  overflow: hidden; pointer-events: none;
+/* --- Animated mesh background (calm, no cursor) --- */
+.mesh {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(40% 50% at 20% 30%, rgba(0, 170, 255, 0.20), transparent 60%),
+    radial-gradient(35% 45% at 70% 20%, rgba(255, 0, 170, 0.18), transparent 60%),
+    radial-gradient(45% 55% at 50% 80%, rgba(0, 255, 170, 0.16), transparent 60%);
+  filter: blur(22px) saturate(120%);
+  animation: meshMove 18s ease-in-out infinite alternate;
 }
-.trail-dot {
-  position: absolute; border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 255, 170, 0.5) 0%, rgba(0, 255, 170, 0) 60%);
-  filter: blur(5px);
-  transition: transform 0.2s ease-out, opacity 0.5s ease-out;
-  will-change: transform;
+@keyframes meshMove {
+  0% {
+    transform: translate3d(0,0,0) scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate3d(0,-10px,0) scale(1.03);
+    opacity: 0.85;
+  }
 }
-.trail-dot:nth-child(1) { width: 50px; height: 50px; transition-duration: 0.2s; }
-.trail-dot:nth-child(2) { width: 45px; height: 45px; transition-duration: 0.3s; }
-.trail-dot:nth-child(3) { width: 40px; height: 40px; transition-duration: 0.4s; }
-.trail-dot:nth-child(4) { width: 35px; height: 35px; transition-duration: 0.5s; }
-.trail-dot:nth-child(5) { width: 30px; height: 30px; transition-duration: 0.6s; }
+@media (prefers-reduced-motion: reduce) {
+  .mesh { animation: none; opacity: 0.35; }
+}
 
-/* --- 기존 스타일 (배경 구체, 버튼 등) --- */
+/* --- Ambient orbs --- */
 .orb {
   position: absolute; border-radius: 50%;
-  filter: blur(80px); opacity: 0.7;
+  filter: blur(100px); opacity: 0.36;
+  will-change: transform, opacity;
 }
-.orb--1 { width: 400px; height: 400px; top: -100px; left: -100px; background: rgba(0, 170, 255, 0.3); }
-.orb--2 { width: 300px; height: 300px; top: 200px; right: -50px; background: rgba(255, 0, 170, 0.3); }
-.orb--3 { width: 250px; height: 250px; bottom: -80px; left: 20%; background: rgba(0, 255, 170, 0.2); }
+.orb--1 { width: 420px; height: 420px; top: -120px; left: -120px; background: rgba(0, 170, 255, 0.26); animation: orbFloat1 16s ease-in-out infinite alternate; }
+.orb--2 { width: 320px; height: 320px; top: 220px; right: -60px; background: rgba(255, 0, 170, 0.22); animation: orbFloat2 20s ease-in-out infinite alternate; }
+.orb--3 { width: 260px; height: 260px; bottom: -90px; left: 22%; background: rgba(0, 255, 170, 0.16); animation: orbFloat3 22s ease-in-out infinite alternate; }
+@keyframes orbFloat1 { 0% { transform: translate3d(0,0,0) } 100% { transform: translate3d(12px, -10px, 0) } }
+@keyframes orbFloat2 { 0% { transform: translate3d(0,0,0) } 100% { transform: translate3d(-14px, 8px, 0) } }
+@keyframes orbFloat3 { 0% { transform: translate3d(0,0,0) } 100% { transform: translate3d(10px, -6px, 0) } }
 
+/* --- Buttons --- */
 .hero-btn {
   padding: 0.75rem 2rem; border: 2px solid white;
   border-radius: 999px; color: white; font-weight: 600;

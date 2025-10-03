@@ -1,18 +1,12 @@
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React from "react";
 import "./SectionHero.css";
 
 export default function SectionHero() {
   const titleLine1 = "프론트엔드 개발자";
   const titleLine2 = "Frontend Developer";
 
-  const [mousePos, setMousePos] = useState({ x: -200, y: -200 });
-
-  const handleMouseMove = (e) => {
-    setMousePos({ x: e.clientX, y: e.clientY });
-  };
-
-  // reveal 애니메이션용 한 글자씩 분해
+  // reveal animation: split text by char
   const animatedText = (text, reveal = true) => {
     return text.split("").map((char, index) => (
       <span
@@ -26,23 +20,9 @@ export default function SectionHero() {
   };
 
   return (
-    <section
-      className="hero h-screen flex items-center justify-center relative overflow-hidden"
-      onMouseMove={handleMouseMove}
-    >
-      <div className="mouse-trail-container">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <div
-            key={index}
-            className="trail-dot"
-            style={{
-              transform: `translate(${mousePos.x}px, ${mousePos.y}px)`,
-              left: "-25px",
-              top: "-25px",
-            }}
-          />
-        ))}
-      </div>
+    <section className="hero h-screen flex items-center justify-center relative overflow-hidden">
+      {/* Calm animated background mesh (no cursor follow) */}
+      <div className="mesh" aria-hidden />
 
       <div className="orb orb--1" aria-hidden />
       <div className="orb orb--2" aria-hidden />
@@ -82,4 +62,3 @@ export default function SectionHero() {
     </section>
   );
 }
-
