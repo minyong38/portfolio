@@ -32,10 +32,11 @@ const Gallery = () => {
           cursor: 'pointer',
         }}
       >
-         뒤로가기
+        뒤로가기
       </button>
     </div>
   );
 };
 
 export default Gallery;
+

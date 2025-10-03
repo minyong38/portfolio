@@ -2,28 +2,30 @@
 
 import { Routes, Route } from 'react-router-dom';
 
-// --- 페이지 컴포넌트들 ---
+// --- 페이지 컴포넌트 ---
 import MainHome from './pages/MainHome';
 import Gallery from './pages/gallery';
 import Maps from './pages/Maps';
 import Music from './pages/Music';
 import NotFound from './pages/NotFound';
-import Guestbook from "./pages/Guestbook";
+import Guestbook from './pages/Guestbook';
+import ProjectFireOverview from './pages/ProjectFireOverview';
+// Projects-related routes removed
 
-// --- 포트폴리오 섹션 컴포넌트들 ---
-import Navbar from "./components/Navbar";
-import SectionHero from "./components/SectionHero";
-import SectionAbout from "./components/SectionAbout";
-import Skills from "./components/Skills";
-import Awards from "./components/Awards";
-import Certificates from "./components/Certificates";
-import Experience from "./components/Experience";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
+// --- 포트폴리오 섹션 컴포넌트 ---
+import Navbar from './components/Navbar';
+import SectionHero from './components/SectionHero';
+import SectionAbout from './components/SectionAbout';
+import Skills from './components/Skills';
+import Awards from './components/Awards';
+import Certificates from './components/Certificates';
+import Experience from './components/Experience';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
 
-import "./index.css";
+import './index.css';
 
-// 원페이지 포트폴리오 레이아웃을 위한 별도 컴포넌트
+// 홈페이지 포트폴리오 레이아웃을 위한 별도 컴포넌트
 function PortfolioLayout() {
   return (
     <>
@@ -47,22 +49,27 @@ function PortfolioLayout() {
 export default function App() {
   return (
     <Routes>
-      {/* 기본 경로는 포트폴리오 페이지를 보여줍니다. */}
+      {/* 기본 경로에 포트폴리오 페이지를 보여줍니다 */}
       <Route path="/" element={<PortfolioLayout />} />
 
-      {/* '/home' 경로에서는 Mac/Windows 선택 페이지를 보여줍니다. */}
+      {/* '/home' 경로에서 Mac/Windows 선택 페이지를 보여줍니다 */}
       <Route path="/home" element={<MainHome />} />
 
-      {/* '/gallery' 경로에서는 갤러리 페이지를 보여줍니다. */}
+      {/* '/gallery' 경로에서 갤러리 페이지를 보여줍니다 */}
       <Route path="/gallery" element={<Gallery />} />
 
-      {/* 그 외 모든 경로는 404 페이지를 보여줍니다. */}
+      {/* 그 외 모든 경로는 404 페이지를 보여줍니다 */}
       <Route path="*" element={<NotFound />} />
 
-      {/* 📍 아래 두 줄을 추가하여 Maps와 Music 경로를 연결합니다. */}
+      {/* Maps / Music / Guestbook */}
       <Route path="/maps" element={<Maps />} />
       <Route path="/music" element={<Music />} />
       <Route path="/guestbook" element={<Guestbook />} />
+
+      {/* Project overview pages */}
+      <Route path="/fire-monitor" element={<ProjectFireOverview />} />
+
+      {/* Projects removed */}
     </Routes>
   );
 }

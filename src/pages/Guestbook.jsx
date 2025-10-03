@@ -30,10 +30,7 @@ export default function Guestbook() {
             <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-cyan-300 to-blue-400 shadow">
               <svg width="22" height="22" fill="none">
                 <rect width="22" height="22" rx="5" fill="#fff" />
-                <path
-                  d="M6 9h10v2H6V9zm0 4h7v2H6v-2z"
-                  fill="#38bdf8"
-                />
+                <path d="M6 9h10v2H6V9zm0 4h7v2H6v-2z" fill="#38bdf8" />
               </svg>
             </span>
             방명록
@@ -67,9 +64,7 @@ export default function Guestbook() {
             </h2>
             <ul className="space-y-4">
               {entries.length === 0 && (
-                <li className="text-gray-400 text-center">
-                  아직 방명록이 없습니다.
-                </li>
+                <li className="text-gray-400 text-center">아직 방명록이 없습니다.</li>
               )}
               {entries.map((e, i) => (
                 <li
@@ -79,24 +74,12 @@ export default function Guestbook() {
                   <div className="font-bold text-cyan-700 flex items-center gap-2">
                     <svg width="16" height="16" fill="none">
                       <circle cx="8" cy="8" r="7" fill="#e0f2fe" />
-                      <text
-                        x="8"
-                        y="12"
-                        textAnchor="middle"
-                        fontSize="9"
-                        fill="#06b6d4"
-                      >
-                        ✍️
-                      </text>
+                      <text x="8" y="12" text-anchor="middle" font-size="9" fill="#06b6d4">👤</text>
                     </svg>
                     {e.name}
                   </div>
-                  <div className="text-gray-800 mt-1 whitespace-pre-line">
-                    {e.msg}
-                  </div>
-                  <div className="text-xs text-gray-400 mt-2 self-end">
-                    {e.date}
-                  </div>
+                  <div className="text-gray-800 mt-1 whitespace-pre-line">{e.msg}</div>
+                  <div className="text-xs text-gray-400 mt-2 self-end">{e.date}</div>
                 </li>
               ))}
             </ul>
@@ -106,3 +89,4 @@ export default function Guestbook() {
     </section>
   );
 }
+

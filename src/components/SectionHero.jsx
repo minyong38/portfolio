@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "./SectionHero.css";
 
 export default function SectionHero() {
-  const titleLine1 = "웹 프론트엔드 개발자";
+  const titleLine1 = "프론트엔드 개발자";
   const titleLine2 = "Frontend Developer";
 
   const [mousePos, setMousePos] = useState({ x: -200, y: -200 });
@@ -12,15 +12,15 @@ export default function SectionHero() {
     setMousePos({ x: e.clientX, y: e.clientY });
   };
 
-  // 한글 라인만 reveal 애니메이션, 영어 라인은 항상 선명하게!
+  // reveal 애니메이션용 한 글자씩 분해
   const animatedText = (text, reveal = true) => {
-    return text.split('').map((char, index) => (
+    return text.split("").map((char, index) => (
       <span
         key={index}
-        style={reveal ? { '--i': index } : {}}
+        style={reveal ? { "--i": index } : {}}
         className={reveal ? undefined : "no-anim"}
       >
-        {char === ' ' ? '\u00A0' : char}
+        {char === " " ? "\u00A0" : char}
       </span>
     ));
   };
@@ -37,8 +37,8 @@ export default function SectionHero() {
             className="trail-dot"
             style={{
               transform: `translate(${mousePos.x}px, ${mousePos.y}px)`,
-              left: '-25px',
-              top: '-25px',
+              left: "-25px",
+              top: "-25px",
             }}
           />
         ))}
@@ -60,7 +60,7 @@ export default function SectionHero() {
         </h1>
 
         <p className="hero-tagline mt-4 text-lg text-gray-300 sequential-fade-in">
-          사용자 경험을 디자인하고 코드로 구현합니다
+          사용자 경험을 생각하며 코드를 구현합니다.
         </p>
 
         <div className="mt-10 hero-btn-container sequential-fade-in">
@@ -82,7 +82,4 @@ export default function SectionHero() {
     </section>
   );
 }
-
-
-
 

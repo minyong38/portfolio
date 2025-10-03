@@ -111,6 +111,7 @@ body { @apply bg-base text-ink font-ui antialiased; }
   display: inline-flex; gap: 8px; align-items: center; opacity: .85;
   font-size: 12px;
 }
+.scrollcue--hero { bottom: 14px; }
 .scrollcue .dot {
   width: 8px; height: 12px; border-radius: 6px; border: 1.6px solid rgba(255,255,255,.55);
   position: relative;
@@ -164,5 +165,31 @@ body { @apply bg-base text-ink font-ui antialiased; }
 .section-title {
   @apply text-white font-bold;
 }
+
+/* Fire Overview slide-in animations */
+.slide-appear { opacity: 0; transform: translateY(28px) scale(.98); }
+.slide-appear.in-view { animation: firefade .7s cubic-bezier(.22,.61,.36,1) both; }
+@keyframes firefade { to { opacity: 1; transform: translateY(0) scale(1); } }
+
+/* Staggered list items */
+.stagger-item { opacity: 0; transform: translateY(12px); animation: firefade .55s ease both; }
+
+/* Simple parallax hook (transform via CSS var) */
+.parallax-elm { transform: translateY(var(--py, 0px)); will-change: transform; }
+
+/* Thumbnails (exactly N visible items, default 7) */
+.thumbs-nav {
+  /* viewport-based panel height */
+  height: calc(100vh - 48px);
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* matches gap-3 */
+  /* sizing variables */
+  --thumbs-visible: 7;
+  --thumbs-gap: 12px;
+  --thumbs-item-h: calc((100vh - 48px - (var(--thumbs-visible) - 1) * var(--thumbs-gap)) / var(--thumbs-visible));
+}
+.thumb-card { height: var(--thumbs-item-h); }
 
 

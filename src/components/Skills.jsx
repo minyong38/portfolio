@@ -15,7 +15,7 @@ export default function Skills() {
         <div className="card p-4 sm:p-6">
           <h2 className="section-title text-white">스킬 : Skills</h2>
           <div className="grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6 mt-4">
-            {icons.map(s => (
+            {icons.map((s) => (
               <div
                 key={s.name}
                 className="skill w-full h-[90px] xs:h-[110px] sm:h-[140px] flex flex-col items-center justify-center"
@@ -30,3 +30,4 @@ export default function Skills() {
     </section>
   );
 }
+
