@@ -223,11 +223,9 @@ export default function ProjectFireOverview() {
       {/* Hero */}
       <Slide id="hero" bg="bg-gradient-to-br from-brand to-cyan-600" footer={<div className="scrollcue opacity-90"><span className="dot" />Scroll</div>}>
         <h1 className="parallax-elm text-white text-5xl sm:text-7xl font-extrabold tracking-tight">AI 기반 실시간 화재·재실 감지 통합 모니터링 시스템</h1>
-        <p className="parallax-elm mt-4 text-white text-2xl sm:text-3xl">Vue + Flask(Socket.IO) + ESP32 • 실시간 관제/관리 UI</p>
         <div className="flex flex-wrap gap-2 justify-center mt-8 text-sm">
-          <span className="px-3 py-1 rounded-full bg-white/20 text-white border border-white/20">Full‑stack(인턴)</span>
-          <span className="px-3 py-1 rounded-full bg-white/20 text-white border border-white/20">2025년 X월 ~ X월</span>
-          <span className="px-3 py-1 rounded-full bg-white/20 text-white border border-white/20">ESP32 • Vue • Flask • AI</span>
+          <span className="px-3 py-1 rounded-full bg-white/20 text-white border border-white/20">Full‑stack</span>
+          <span className="px-3 py-1 rounded-full bg-white/20 text-white border border-white/20">2025년 9월 ~ 10월</span>
         </div>
       </Slide>
 

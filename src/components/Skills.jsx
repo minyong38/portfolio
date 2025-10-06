@@ -9,6 +9,11 @@ const icons = [
   { name: 'HTML5 & CSS3', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
   { name: 'React', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
   { name: 'SQL', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
+  { name: 'C++', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg' },
+  { name: 'Vue', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg' },
+  { name: 'Java Spring', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg' },
+  { name: 'Flask', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg', style: { filter: 'invert(1) brightness(1.2)' } },
+  { name: 'PlatformIO', src: 'https://cdn.simpleicons.org/platformio/f5822a' },
 ];
 
 export default function Skills() {
@@ -33,6 +38,7 @@ export default function Skills() {
                       decoding="async"
                       width={64}
                       height={64}
+                      style={s.style}
                     />
                     <div className="label mt-2 text-xs sm:text-base font-semibold text-white">{s.name}</div>
                   </div>
