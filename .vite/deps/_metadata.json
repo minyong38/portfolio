@@ -1,0 +1,58 @@
+{
+  "hash": "22b8e241",
+  "configHash": "90400430",
+  "lockfileHash": "1f6a0be5",
+  "browserHash": "51a4b76f",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "1c970f71",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "3523033b",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.mjs",
+      "file": "react-router-dom.js",
+      "fileHash": "9f0bc002",
+      "needsInterop": false
+    },
+    "react-leaflet": {
+      "src": "../../node_modules/react-leaflet/lib/index.js",
+      "file": "react-leaflet.js",
+      "fileHash": "6d9643fd",
+      "needsInterop": false
+    },
+    "leaflet": {
+      "src": "../../node_modules/leaflet/dist/leaflet-src.js",
+      "file": "leaflet.js",
+      "fileHash": "223146cf",
+      "needsInterop": true
+    },
+    "html2canvas": {
+      "src": "../../node_modules/html2canvas/dist/html2canvas.esm.js",
+      "file": "html2canvas.js",
+      "fileHash": "ab572337",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-IIT576ZH": {
+      "file": "chunk-IIT576ZH.js"
+    },
+    "chunk-3VDXVL42": {
+      "file": "chunk-3VDXVL42.js"
+    },
+    "chunk-IW2PTZK5": {
+      "file": "chunk-IW2PTZK5.js"
+    },
+    "chunk-5WRI5ZAA": {
+      "file": "chunk-5WRI5ZAA.js"
+    }
+  }
+}
