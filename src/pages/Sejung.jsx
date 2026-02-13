@@ -68,8 +68,27 @@ export default function Sejung() {
           <h1 className="text-3xl sm:text-4xl font-bold text-rose-500 mb-4 leading-tight">
             야호~!! 🎉
           </h1>
-          <p className="text-xl text-pink-500 mb-2">미뇽이가 너무 행복해합니다</p>
-          <p className="text-3xl">💗💗💗</p>
+          <p className="text-xl text-pink-500 mb-2">미뇽이가 너무 행복해합니다 크크</p>
+          <p className="text-3xl mb-8">💗💗💗</p>
+
+          {/* 서브 페이지 메뉴 */}
+          <div className="grid grid-cols-2 gap-3 max-w-xs mx-auto">
+            {[
+              { to: '/sejung/dday',     emoji: '💕', label: 'D-Day' },
+              { to: '/sejung/timeline', emoji: '📸', label: '추억' },
+              { to: '/sejung/letter',   emoji: '💌', label: '러브레터' },
+              { to: '/sejung/roulette', emoji: '🎰', label: '룰렛 데이트' },
+            ].map(item => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className="bg-white/60 backdrop-blur rounded-2xl px-4 py-3 shadow-sm hover:shadow-md hover:bg-white/80 transition flex items-center gap-2"
+              >
+                <span className="text-xl">{item.emoji}</span>
+                <span className="text-rose-500 font-semibold text-sm">{item.label}</span>
+              </Link>
+            ))}
+          </div>
         </div>
         <Link
           to="/home"

@@ -250,4 +250,35 @@ body { @apply bg-base text-ink font-ui antialiased; }
   animation: sejung-spin-slow 2s ease-in-out infinite;
 }
 
+/* Heartbeat animation (D-Day page) */
+@keyframes sejung-heartbeat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.25); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.15); }
+  60% { transform: scale(1); }
+}
+.sejung-heartbeat {
+  display: inline-block;
+  animation: sejung-heartbeat 1.4s ease-in-out infinite;
+}
+
+/* Fade-in for timeline cards & roulette results */
+@keyframes sejung-fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.sejung-fade-in {
+  animation: sejung-fade-in 0.6s ease both;
+}
+
+/* Letter open animation */
+@keyframes sejung-letter-open {
+  from { opacity: 0; transform: scale(0.8) rotateX(20deg); }
+  to   { opacity: 1; transform: scale(1) rotateX(0deg); }
+}
+.sejung-letter-open {
+  animation: sejung-letter-open 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
 

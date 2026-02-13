@@ -11,6 +11,10 @@ import NotFound from './pages/NotFound';
 import Guestbook from './pages/Guestbook';
 import ProjectFireOverview from './pages/ProjectFireOverview';
 import Sejung from './pages/Sejung';
+import SejungDday from './pages/SejungDday';
+import SejungTimeline from './pages/SejungTimeline';
+import SejungLetter from './pages/SejungLetter';
+import SejungRoulette from './pages/SejungRoulette';
 
 // Portfolio sections
 import Navbar from './components/Navbar';
@@ -62,6 +66,10 @@ export default function App() {
 
       {/* Secret pages */}
       <Route path="/sejung" element={<Sejung />} />
+      <Route path="/sejung/dday" element={<SejungDday />} />
+      <Route path="/sejung/timeline" element={<SejungTimeline />} />
+      <Route path="/sejung/letter" element={<SejungLetter />} />
+      <Route path="/sejung/roulette" element={<SejungRoulette />} />
     </Routes>
   );
 }
