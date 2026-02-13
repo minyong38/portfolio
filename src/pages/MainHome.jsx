@@ -9,6 +9,7 @@ const ALL_APPS_MAC = [
   { name: "Instagram", url: "https://www.instagram.com/meee__nyong/", cat: "Social", icon: "icons/instagram.png" },
   { name: "Guestbook", url: "/guestbook", cat: "Social", icon: "icons/guestbook.png" },
   { name: "Projects", url: "/fire-monitor", cat: "Work", icon: "icons/projects.svg" },
+  { name: "이세정", url: "/sejung", cat: "Secret", icon: "icons/fic.jpg" },
 ];
 
 const ALL_APPS_WIN = [
@@ -18,6 +19,7 @@ const ALL_APPS_WIN = [
   { name: "Instagram", url: "https://www.instagram.com/meee__nyong/", cat: "Social", icon: "icons/win/instagram.png" },
   { name: "Guestbook", url: "/guestbook", cat: "Social", icon: "icons/win/guestbook.png" },
   { name: "Projects", url: "/fire-monitor", cat: "Work", icon: "icons/projects.svg" },
+  { name: "이세정", url: "/sejung", cat: "Secret", icon: "icons/fic.jpg" },
 ];
 
 export default function MainHome() {

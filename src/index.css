@@ -231,4 +231,23 @@ body { @apply bg-base text-ink font-ui antialiased; }
 
 /* (removed) Section-by-section snap scrolling */
 
+/* === Sejung page animations === */
+@keyframes sejung-float {
+  0%, 100% { transform: translateY(0px) rotate(-5deg); }
+  50%       { transform: translateY(-14px) rotate(5deg); }
+}
+.sejung-float {
+  animation: sejung-float 4s ease-in-out infinite;
+}
+
+@keyframes sejung-spin-slow {
+  0%   { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(180deg) scale(1.15); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+.sejung-spin-slow {
+  display: inline-block;
+  animation: sejung-spin-slow 2s ease-in-out infinite;
+}
+
 

@@ -10,6 +10,7 @@ import Music from './pages/Music';
 import NotFound from './pages/NotFound';
 import Guestbook from './pages/Guestbook';
 import ProjectFireOverview from './pages/ProjectFireOverview';
+import Sejung from './pages/Sejung';
 
 // Portfolio sections
 import Navbar from './components/Navbar';
@@ -58,6 +59,9 @@ export default function App() {
 
       {/* Project overview pages */}
       <Route path="/fire-monitor" element={<ProjectFireOverview />} />
+
+      {/* Secret pages */}
+      <Route path="/sejung" element={<Sejung />} />
     </Routes>
   );
 }
