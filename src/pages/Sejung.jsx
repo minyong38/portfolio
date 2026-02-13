@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import myPhoto from '../assets/1123.jpg';
 
 // 배경 꽃 장식 위치 - 렌더링마다 달라지지 않게 고정
 const FLOWERS = [
@@ -57,6 +58,13 @@ export default function Sejung() {
         ))}
         <div className="text-center z-10 relative px-6">
           <div className="text-7xl mb-6 sejung-spin-slow">🌸</div>
+          <div className="relative inline-block mb-6">
+            <div className="w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden border-4 border-rose-300 shadow-xl mx-auto sejung-spin-slow" style={{ animationDuration: '8s' }}>
+              <img src={myPhoto} alt="우리 사진" className="w-full h-full object-cover" />
+            </div>
+            <span className="absolute -top-2 -right-2 text-3xl">💗</span>
+            <span className="absolute -bottom-2 -left-2 text-3xl">🌸</span>
+          </div>
           <h1 className="text-3xl sm:text-4xl font-bold text-rose-500 mb-4 leading-tight">
             야호~!! 🎉
           </h1>
