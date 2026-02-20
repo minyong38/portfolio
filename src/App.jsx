@@ -15,6 +15,7 @@ import SejungDday from './pages/SejungDday';
 import SejungTimeline from './pages/SejungTimeline';
 import SejungLetter from './pages/SejungLetter';
 import SejungRoulette from './pages/SejungRoulette';
+import SejungGallery from './pages/SejungGallery';
 
 // Portfolio sections
 import Navbar from './components/Navbar';
@@ -70,6 +71,7 @@ export default function App() {
       <Route path="/sejung/timeline" element={<SejungTimeline />} />
       <Route path="/sejung/letter" element={<SejungLetter />} />
       <Route path="/sejung/roulette" element={<SejungRoulette />} />
+      <Route path="/sejung/gallery" element={<SejungGallery />} />
     </Routes>
   );
 }

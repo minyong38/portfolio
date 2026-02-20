@@ -78,6 +78,7 @@ export default function Sejung() {
               { to: '/sejung/timeline', emoji: '📸', label: '추억' },
               { to: '/sejung/letter',   emoji: '💌', label: '러브레터' },
               { to: '/sejung/roulette', emoji: '🎰', label: '룰렛 데이트' },
+              { to: '/sejung/gallery',  emoji: '📷', label: '포토 갤러리' },
             ].map(item => (
               <Link
                 key={item.to}
