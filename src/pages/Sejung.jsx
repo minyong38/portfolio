@@ -74,12 +74,13 @@ export default function Sejung() {
           {/* 서브 페이지 메뉴 */}
           <div className="grid grid-cols-2 gap-3 max-w-xs mx-auto">
             {[
-              { to: '/sejung/dday',     emoji: '💕', label: 'D-Day' },
-              { to: '/sejung/timeline', emoji: '📸', label: '추억' },
-              { to: '/sejung/letter',   emoji: '💌', label: '러브레터' },
-              { to: '/sejung/roulette', emoji: '🎰', label: '룰렛 데이트' },
-              { to: '/sejung/gallery',  emoji: '📷', label: '포토 갤러리' },
-              { to: '/sejung/quiz',     emoji: '💭', label: '커플 퀴즈' },
+              { to: '/sejung/dday',        emoji: '💕', label: 'D-Day' },
+              { to: '/sejung/timeline',    emoji: '📸', label: '추억' },
+              { to: '/sejung/letter',      emoji: '💌', label: '러브레터' },
+              { to: '/sejung/roulette',    emoji: '🎰', label: '룰렛 데이트' },
+              { to: '/sejung/gallery',     emoji: '📷', label: '포토 갤러리' },
+              { to: '/sejung/quiz',        emoji: '💭', label: '커플 퀴즈' },
+              { to: '/sejung/restaurants', emoji: '🍽️', label: '맛집 지도' },
             ].map(item => (
               <Link
                 key={item.to}

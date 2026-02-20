@@ -17,6 +17,7 @@ import SejungLetter from './pages/SejungLetter';
 import SejungRoulette from './pages/SejungRoulette';
 import SejungGallery from './pages/SejungGallery';
 import SejungQuiz from './pages/SejungQuiz';
+import SejungRestaurants from './pages/SejungRestaurants';
 
 // Portfolio sections
 import Navbar from './components/Navbar';
@@ -74,6 +75,7 @@ export default function App() {
       <Route path="/sejung/roulette" element={<SejungRoulette />} />
       <Route path="/sejung/gallery" element={<SejungGallery />} />
       <Route path="/sejung/quiz" element={<SejungQuiz />} />
+      <Route path="/sejung/restaurants" element={<SejungRestaurants />} />
     </Routes>
   );
 }
